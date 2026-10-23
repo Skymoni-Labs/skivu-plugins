@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.dpapi
+.DS_Store
+Thumbs.db

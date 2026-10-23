@@ -1,0 +1,21 @@
+name: 插件或接口提案
+description: 提出插件创意、宿主接口需求或收录问题
+title: '[提案] '
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 想实现什么？
+      description: 描述面向用户的用途，勿填写密钥或私有数据。
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: 源码、许可与参考资料
+      description: 如有现成作品，请附原仓库和许可证。
+  - type: textarea
+    id: capabilities
+    attributes:
+      label: 需要哪些宿主能力？
+      description: 当前只有纯文本包草案；涉及网络、语音、文件等需求请具体说明。

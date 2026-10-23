@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Skivu preview catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "protocolVersion",
+    "runtimeReady",
+    "plugins"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "protocolVersion": {
+      "const": "0.1-draft"
+    },
+    "runtimeReady": {
+      "const": false
+    },
+    "plugins": {
+      "type": "array",
+      "maxItems": 5000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "version",
+          "author",
+          "license",
+          "permissions",
+          "status",
+          "source"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*\\.[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "pattern": "\\S"
+          },
+          "version": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+          },
+          "author": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "\\S"
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 150,
+            "pattern": "\\S"
+          },
+          "permissions": {
+            "type": "array",
+            "maxItems": 0
+          },
+          "status": {
+            "const": "preview"
+          },
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "repository",
+              "commit",
+              "packagePath"
+            ],
+            "properties": {
+              "repository": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 500,
+                "pattern": "^https://[^\\s/?#@]+(?:/[^\\s?#]*)?$"
+              },
+              "commit": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "packagePath": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "\\S"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

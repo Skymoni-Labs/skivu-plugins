@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "your-name.my-plugin",
+  "name": "我的内容包",
+  "description": "请替换为内容包的具体用途。",
+  "version": "0.1.0",
+  "author": "Your Name",
+  "license": "GPL-3.0-only",
+  "repository": "https://github.com/your-name/your-plugin",
+  "kind": "prompt-pack",
+  "entry": "prompts/system.md",
+  "permissions": []
+}

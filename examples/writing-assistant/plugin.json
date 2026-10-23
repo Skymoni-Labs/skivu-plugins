@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "skivu.writing-assistant",
+  "name": "写作助手示例",
+  "description": "保留原意，帮助整理、润色和比较文字表达。",
+  "version": "0.1.0",
+  "author": "Skivu Contributors",
+  "license": "GPL-3.0-only",
+  "repository": "https://github.com/skyjjgw/skivu-plugins",
+  "kind": "prompt-pack",
+  "entry": "prompts/system.md",
+  "permissions": []
+}

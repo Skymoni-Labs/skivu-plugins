@@ -1,0 +1,9 @@
+Skivu Plugins
+Copyright (C) 2026 Skivu Contributors
+
+Original repository materials, templates and bundled examples:
+SPDX-License-Identifier: GPL-3.0-only
+See LICENSE for the full license text.
+
+Separately hosted community plugins retain their own declared licenses.
+The development dependency jsonschema is installed separately, not vendored.

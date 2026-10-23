@@ -24,7 +24,7 @@ class PackageValidationTests(unittest.TestCase):
         path.write_text(json.dumps(data), encoding="utf-8")
 
     def test_repository_and_example_are_valid(self):
-        self.assertEqual(validate.validate_repository(), 2)
+        self.assertEqual(validate.validate_repository(), 4)
         self.assertEqual(validate.validate_package(self.package)["kind"], "prompt-pack")
 
     def test_entry_cannot_escape_package_or_use_windows_paths(self):

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "kind": "ui-preset",
+  "renderer": "skivu.social-ui.v1",
+  "id": "skivu.qq",
+  "name": "QQ",
+  "version": "1.0.0",
+  "author": "Skivu",
+  "license": "GPL-3.0-only",
+  "description": "QQ 风格消息、频道、联系人和动态空间，沿用 Skivu 角色与独立聊天记录。",
+  "repository": "https://github.com/skyjjgw/skivu-plugins",
+  "mode": "qq",
+  "minHostVersion": "0.2.19",
+  "permissions": []
+}

@@ -7,6 +7,7 @@ from pathlib import Path, PurePosixPath
 import sys
 
 from jsonschema import Draft202012Validator, FormatChecker
+from runtime_schema import PRESET
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_ENTRY_BYTES = 256 * 1024
@@ -73,6 +74,14 @@ def validate_package(package: Path):
     if package.is_symlink():
         raise ValueError("Package directory cannot be a symbolic link")
     manifest = read_json(local_file(package, "plugin.json"))
+    if manifest.get("kind") == "ui-preset":
+        errors = list(Draft202012Validator(PRESET).iter_errors(manifest))
+        if errors:
+            raise ValueError(errors[0].message)
+        for required in ("README.md", "LICENSE"):
+            if not local_file(package, required).read_text(encoding="utf-8").strip():
+                raise ValueError(f"{required} cannot be empty")
+        return manifest
     check_schema(manifest, "plugin.schema.json")
     entry = local_file(package, manifest["entry"])
     if entry.suffix.lower() not in (".md", ".txt"):
@@ -92,6 +101,23 @@ def validate_package(package: Path):
 
 
 def validate_catalog(data):
+    if data.get("schemaVersion") == 2:
+        if set(data) != {"schemaVersion", "protocolVersion", "runtimeReady", "plugins"} or data.get("protocolVersion") != "1.0" or data.get("runtimeReady") is not True or not isinstance(data.get("plugins"), list) or len(data["plugins"]) > 100:
+            raise ValueError("Invalid runtime catalog")
+        seen = set()
+        import re
+        for entry in data["plugins"]:
+            metadata = {k: v for k, v in entry.items() if k != "package"}
+            errors = list(Draft202012Validator(PRESET).iter_errors(metadata))
+            if errors:
+                raise ValueError(errors[0].message)
+            if entry["id"] in seen:
+                raise ValueError("Duplicate plugin ID")
+            seen.add(entry["id"])
+            package = entry.get("package", {})
+            if set(package) != {"url", "sha256", "bytes"} or not re.fullmatch(r"https://raw\.githubusercontent\.com/skyjjgw/skivu-plugins/[a-f0-9]{40}/plugins/" + re.escape(entry["mode"]) + r"/plugin\.json", package.get("url", "")) or not re.fullmatch(r"[a-f0-9]{64}", package.get("sha256", "")) or type(package.get("bytes")) is not int or not 0 < package["bytes"] <= 16384:
+                raise ValueError("Invalid immutable package URL, digest or size")
+        return
     check_schema(data, "catalog.schema.json")
     seen = set()
     for plugin in data["plugins"]:
@@ -102,10 +128,18 @@ def validate_catalog(data):
 
 
 def validate_repository():
-    validate_catalog(read_json(ROOT / "catalog/index.json", limit=1024 * 1024))
+    catalog = read_json(ROOT / "catalog/index.json", limit=1024 * 1024)
+    validate_catalog(catalog)
+    if catalog["schemaVersion"] == 2:
+        import hashlib
+        for item in catalog["plugins"]:
+            package = ROOT / "plugins" / item["mode"] / "plugin.json"
+            raw = package.read_bytes()
+            if hashlib.sha256(raw).hexdigest() != item["package"]["sha256"] or len(raw) != item["package"]["bytes"] or read_json(package) != {k: v for k, v in item.items() if k != "package"}:
+                raise ValueError("Catalog and local package metadata/hash differ")
     ids = set()
     count = 0
-    for parent in ("templates", "examples"):
+    for parent in ("templates", "examples", "plugins"):
         for manifest_path in sorted((ROOT / parent).rglob("plugin.json")):
             manifest = validate_package(manifest_path.parent)
             if manifest["id"] in ids:
@@ -127,7 +161,7 @@ def main():
             print(f"Valid draft package: {manifest['id']} {manifest['version']}")
         else:
             count = validate_repository()
-            print(f"Valid preview catalog and {count} local packages; runtime not enabled")
+            print(f"Valid catalog and {count} local packages; only host-supported data presets install")
     except (ValueError, OSError) as error:
         print(f"Validation failed: {error}", file=sys.stderr)
         return 1

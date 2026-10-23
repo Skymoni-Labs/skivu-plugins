@@ -1,5 +1,7 @@
 # 社区目录
 
+2026-10-24 更新：`catalog/index.json` 已升级为 App 0.2.19 使用的 `1.0` 安装目录，格式与安装边界见 [运行格式](runtime.md)。下方 `0.1-draft` 格式保留在 `catalog/drafts.json`，不能作为安装源；仅纯文本提示词投稿继续使用旧草案。
+
 `catalog/index.json` 是机器可读的**预览目录**，不是 App 安装源。
 
 ```json

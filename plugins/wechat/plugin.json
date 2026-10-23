@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "kind": "ui-preset",
+  "renderer": "skivu.social-ui.v1",
+  "id": "skivu.wechat",
+  "name": "微信",
+  "version": "1.0.0",
+  "author": "Skivu",
+  "license": "GPL-3.0-only",
+  "description": "微信风格消息、通讯录、朋友圈和个人页，支持角色虚拟红包与转账。",
+  "repository": "https://github.com/skyjjgw/skivu-plugins",
+  "mode": "wechat",
+  "minHostVersion": "0.2.19",
+  "permissions": []
+}

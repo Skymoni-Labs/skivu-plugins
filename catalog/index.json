@@ -1,6 +1,47 @@
 {
-  "schemaVersion": 1,
-  "protocolVersion": "0.1-draft",
-  "runtimeReady": false,
-  "plugins": []
+  "schemaVersion": 2,
+  "protocolVersion": "1.0",
+  "runtimeReady": true,
+  "plugins": [
+    {
+      "schemaVersion": 1,
+      "kind": "ui-preset",
+      "renderer": "skivu.social-ui.v1",
+      "id": "skivu.qq",
+      "name": "QQ",
+      "version": "1.0.0",
+      "author": "Skivu",
+      "license": "GPL-3.0-only",
+      "description": "QQ 风格消息、频道、联系人和动态空间，沿用 Skivu 角色与独立聊天记录。",
+      "repository": "https://github.com/skyjjgw/skivu-plugins",
+      "mode": "qq",
+      "minHostVersion": "0.2.19",
+      "permissions": [],
+      "package": {
+        "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/99b23671dee6062688bce336ff474c4dfef6fa3f/plugins/qq/plugin.json",
+        "sha256": "66aa89781ad27e91f4c8a0fb07d00f1764899a70cad5a703c6c0bb42d98a89c0",
+        "bytes": 437
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "ui-preset",
+      "renderer": "skivu.social-ui.v1",
+      "id": "skivu.wechat",
+      "name": "微信",
+      "version": "1.0.0",
+      "author": "Skivu",
+      "license": "GPL-3.0-only",
+      "description": "微信风格消息、通讯录、朋友圈和个人页，支持角色虚拟红包与转账。",
+      "repository": "https://github.com/skyjjgw/skivu-plugins",
+      "mode": "wechat",
+      "minHostVersion": "0.2.19",
+      "permissions": [],
+      "package": {
+        "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/99b23671dee6062688bce336ff474c4dfef6fa3f/plugins/wechat/plugin.json",
+        "sha256": "6a5d52f3b5e53fc7546848990f5a9f06f807aab4f41cba5af9e1023becbfb4dc",
+        "bytes": 445
+      }
+    }
+  ]
 }

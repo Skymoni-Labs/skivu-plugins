@@ -163,7 +163,9 @@ def main():
             print(f"Valid draft package: {manifest['id']} {manifest['version']}")
         else:
             count = validate_repository()
-            print(f"Valid catalog and {count} local packages; only host-supported data presets install")
+            from validate_extensions import validate as validate_extensions
+            extensions, entries = validate_extensions()
+            print(f"Valid catalog, {count} preset/draft packages and {extensions} extension packages ({entries} listed)")
     except (ValueError, OSError) as error:
         print(f"Validation failed: {error}", file=sys.stderr)
         return 1

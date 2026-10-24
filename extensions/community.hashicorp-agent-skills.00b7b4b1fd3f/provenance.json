@@ -1,0 +1,32 @@
+{
+  "upstream": {
+    "repository": "https://github.com/hashicorp/agent-skills",
+    "commit": "f706481af9b8fedb66de909f6243ad29601afa0c",
+    "path": "plugins/terraform/skills/terraform-style-guide"
+  },
+  "license": "MPL-2.0",
+  "changes": "Upstream: https://github.com/hashicorp/agent-skills/tree/f706481af9b8fedb66de909f6243ad29601afa0c/plugins/terraform/skills/terraform-style-guide\nOriginal instruction: plugins/terraform/skills/terraform-style-guide/SKILL.md\nLicense: MPL-2.0; all upstream notices remain in the original text.\nSkivu adaptation (2026-10-24): JSON packaging, Chinese catalog description, and inline text references. The upstream instruction and selected references are unchanged. No upstream executable scripts are included. This package provides conversational guidance; it does not add process or filesystem execution.\n",
+  "market_entries": [
+    {
+      "id": "skill-github-com-hashicorp-agent-skills-terraform-code-generation-skills-terraform-style-guide",
+      "title": "terraform-style-guide"
+    }
+  ],
+  "files": [
+    {
+      "path": "plugins/terraform/skills/terraform-style-guide/SKILL.md",
+      "sha256": "3a5c2e06a1daa07600d03f48328d1479284e7a9d59d66b2663693ca972080e22",
+      "bytes": 6963
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04",
+      "bytes": 16726
+    },
+    {
+      "path": "plugins/terraform/skills/terraform-style-guide/SECURITY.md",
+      "sha256": "3dc8ffa10139e9772c5c102fee6377f66f5167bd043a7c43e6e5df682dc75f92",
+      "bytes": 4872
+    }
+  ]
+}

@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          # Extension validation compares packages with their pinned historical commits.
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:

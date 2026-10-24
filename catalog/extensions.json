@@ -97,6 +97,30 @@
         "sha256": "659558e698ef501ab2d16826d423ada411c813989792681850a53c8ee43a8beb",
         "bytes": 2629
       }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "community.hashicorp-agent-skills.00b7b4b1fd3f",
+      "name": "Terraform 编写规范",
+      "version": "1.0.0",
+      "author": "hashicorp",
+      "license": "MPL-2.0",
+      "description": "依据 HashiCorp 的代码风格与安全规范生成或审阅用户提供的 Terraform 文本。执行 fmt、validate 等验证命令需要外部 Terraform 环境。",
+      "kind": "skill",
+      "minHostVersion": "0.2.36",
+      "permissions": [
+        "prompt"
+      ],
+      "source": {
+        "repository": "https://github.com/hashicorp/agent-skills",
+        "commit": "f706481af9b8fedb66de909f6243ad29601afa0c",
+        "path": "plugins/terraform/skills/terraform-style-guide"
+      },
+      "package": {
+        "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/6195442eca889c7a67a93540f04c26ff80dfda44/extensions/community.hashicorp-agent-skills.00b7b4b1fd3f/package.json",
+        "sha256": "0ea494bc9bcb02170835b6ae25beacd78cb9fd74d9337ad48c0f7f4fcea59dcd",
+        "bytes": 31229
+      }
     }
   ]
 }

@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "id": "community.firecrawl.mcp",
+    "name": "Firecrawl 网页工具",
+    "version": "1.0.0",
+    "author": "firecrawl / Skivu adapter",
+    "license": "MIT",
+    "description": "连接 Firecrawl MCP 服务，手动调用网页搜索、抓取和解析工具。托管服务有独立用量限制。",
+    "kind": "mcp-http",
+    "minHostVersion": "0.2.36",
+    "permissions": [
+      "network"
+    ],
+    "source": {
+      "repository": "https://github.com/firecrawl/firecrawl-mcp-server",
+      "commit": "da436cccdf3f51da530350b3c15753b4742aa8a2",
+      "path": "."
+    }
+  },
+  "payload": {
+    "licenseText": "MIT License\n\nCopyright (c) 2025 vrknetha\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE. ",
+    "notices": "Original server: firecrawl/firecrawl-mcp-server, MIT. Skivu adaptation (2026-10-24): independent MCP HTTP connection descriptor and Chinese setup instructions. No server code or assets are bundled. The hosted endpoint is operated by its upstream provider; source commit pins provenance, not the hosted service version.",
+    "endpoint": "https://mcp.firecrawl.dev/v2/mcp",
+    "setup": "默认使用上游公开的无需密钥端点，可在连接后查看服务实际提供的工具。托管服务有独立的用量限制；需要更多能力时使用自己的服务地址及访问密钥。自建服务需启用 Streamable HTTP 并通过 HTTPS 提供 /mcp。此扩展不会在手机运行 Node.js，也不自动创建账号或购买服务。",
+    "requirements": [
+      "可访问的 HTTPS MCP 服务；上游服务独立决定额度和功能。"
+    ]
+  }
+}

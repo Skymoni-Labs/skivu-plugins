@@ -1,0 +1,16 @@
+{
+  "upstream": {
+    "repository": "https://github.com/firecrawl/firecrawl-mcp-server",
+    "commit": "da436cccdf3f51da530350b3c15753b4742aa8a2",
+    "path": "."
+  },
+  "license": "MIT",
+  "changes": "Original server: firecrawl/firecrawl-mcp-server, MIT. Skivu adaptation (2026-10-24): independent MCP HTTP connection descriptor and Chinese setup instructions. No server code or assets are bundled. The hosted endpoint is operated by its upstream provider; source commit pins provenance, not the hosted service version.",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "9c12811442b47e27f690be7cf0252f6bf93ddee18476f13e0fc6b4badb09c22c",
+      "bytes": 1065
+    }
+  ]
+}

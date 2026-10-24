@@ -13,7 +13,7 @@ Skivu 0.2.36 新增[技能与 MCP 扩展](docs/extensions.md)：安装并主动�
 ## 开始创作
 
 1. Fork 本仓库，或在自己的 GitHub 仓库开发。
-2. 阅读 [开发规范](docs/development.md)，复制 `templates/prompt-pack/`，填写 `plugin.json` 并修改提示词内容。
+2. 阅读[开放 SDK](docs/open-plugin-sdk.md)，复制 `templates/web-plugin/`，修改清单、页面与业务代码。技能/MCP 或旧数据预设使用各自格式；`prompt-pack` 仅为历史草案。
 3. 在自己的源码仓库保留许可证和必要的第三方声明。独立插件可选择自己的开源许可证，并在清单中准确声明。
 4. 运行下方检查。需要收录时按 [贡献指南](CONTRIBUTING.md) 提交 PR；功能或接口建议可直接发 Issue。
 
@@ -21,7 +21,10 @@ Skivu 0.2.36 新增[技能与 MCP 扩展](docs/extensions.md)：安装并主动�
 python -m pip install -r requirements-dev.txt
 python tools/validate.py
 python -m unittest discover -s tests -v
-# 检查仓库外的独立内容包：
+# 构建可在 App 本地导入的独立插件：
+python tools/build_web_plugin.py templates/web-plugin --output dist/plugin-lab.skivu.json
+python tools/build_web_plugin.py --check dist/plugin-lab.skivu.json
+# 检查仓库外的旧草案/数据预设：
 python tools/validate.py --package /path/to/your/plugin
 ```
 

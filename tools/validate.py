@@ -167,7 +167,9 @@ def main():
             count = validate_repository()
             from validate_extensions import validate as validate_extensions
             extensions, entries = validate_extensions()
-            print(f"Valid catalog, {count} preset/draft packages and {extensions} extension packages ({entries} listed)")
+            from validate_web_plugins import validate as validate_web_plugins
+            web_packages, web_entries = validate_web_plugins()
+            print(f"Valid catalog, {count} preset/draft packages, {extensions} extensions ({entries} listed), {web_packages} Web plugins ({web_entries} listed)")
     except (ValueError, OSError) as error:
         print(f"Validation failed: {error}", file=sys.stderr)
         return 1

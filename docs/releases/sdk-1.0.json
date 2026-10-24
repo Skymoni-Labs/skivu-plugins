@@ -1,0 +1,33 @@
+{
+  "release": "v0.2.38-build.42",
+  "appSourceCommit": "46290b6b293737b243ec4e94933466ddef8a5c8a",
+  "releaseUrl": "https://github.com/skyjjgw/skivu/releases/tag/v0.2.38-build.42",
+  "apk": {
+    "bytes": 94144556,
+    "sha256": "ac51ba610ce856a8b039e7eb8888c3163a0bf7232631537115be287eb99d0d2e",
+    "abis": ["armeabi-v7a", "arm64-v8a", "x86_64"],
+    "minSdk": 24,
+    "targetSdk": 36
+  },
+  "sourceArchive": {
+    "bytes": 32942194,
+    "sha256": "080f0b6993ec425969e5158c37bad1de85596901350cbecd8767e75f4d8e3273"
+  },
+  "catalog": "https://skymoni.com/app-plugins/catalog/apps.json",
+  "catalogCommit": "fb2d39a260883c936a47ae49b8ed487d63ea8614",
+  "packageCommit": "cd03cd8d004678be540aa89e6a3d753e52932e5d",
+  "verification": {
+    "flutterRegressions": 392,
+    "javascriptSdkTests": 5,
+    "pluginRepositoryTests": 16,
+    "androidIsolationChecks": 11,
+    "updateAndDownloadChecks": 12,
+    "finalReleaseApkMarketVerified": true,
+    "actualPluginBundledInApk": false,
+    "physicalHandsetVerified": false,
+    "paidModelCallsOnDevice": 0,
+    "previousUpdateEntriesPreserved": true,
+    "backendRestarted": false,
+    "frontendChanged": false
+  }
+}

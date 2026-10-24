@@ -1,0 +1,27 @@
+{
+  "upstream": {
+    "repository": "https://github.com/anthropics/skills",
+    "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+    "path": "skills/frontend-design"
+  },
+  "license": "Apache-2.0",
+  "changes": "Upstream: https://github.com/anthropics/skills/tree/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design\nOriginal instruction: skills/frontend-design/SKILL.md\nLicense: Apache-2.0; all upstream notices remain in the original text.\nSkivu adaptation (2026-10-24): JSON packaging, Chinese catalog description, and inline text references. The upstream instruction and selected references are unchanged. No upstream executable scripts are included. This package provides conversational guidance; it does not add process or filesystem execution.\n",
+  "market_entries": [
+    {
+      "id": "skill-github-com-anthropics-skills-skills-frontend-design",
+      "title": "frontend-design"
+    }
+  ],
+  "files": [
+    {
+      "path": "skills/frontend-design/SKILL.md",
+      "sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+      "bytes": 9390
+    },
+    {
+      "path": "skills/frontend-design/LICENSE.txt",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "bytes": 10174
+    }
+  ]
+}

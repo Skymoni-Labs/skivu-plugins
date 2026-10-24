@@ -128,6 +128,8 @@ def validate_catalog(data):
 
 
 def validate_repository():
+    from validate_extensions import validate as validate_extensions
+    validate_extensions()
     catalog = read_json(ROOT / "catalog/index.json", limit=1024 * 1024)
     validate_catalog(catalog)
     if catalog["schemaVersion"] == 2:

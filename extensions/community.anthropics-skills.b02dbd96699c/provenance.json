@@ -1,0 +1,47 @@
+{
+  "upstream": {
+    "repository": "https://github.com/anthropics/skills",
+    "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+    "path": "skills/internal-comms"
+  },
+  "license": "Apache-2.0",
+  "changes": "Upstream: https://github.com/anthropics/skills/tree/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/internal-comms\nOriginal instruction: skills/internal-comms/SKILL.md\nLicense: Apache-2.0; all upstream notices remain in the original text.\nSkivu adaptation (2026-10-24): JSON packaging, Chinese catalog description, and inline text references. The upstream instruction and selected references are unchanged. No upstream executable scripts are included. This package provides conversational guidance; it does not add process or filesystem execution.\n",
+  "market_entries": [
+    {
+      "id": "skill-github-com-anthropics-skills-skills-internal-comms",
+      "title": "internal-comms"
+    }
+  ],
+  "files": [
+    {
+      "path": "skills/internal-comms/SKILL.md",
+      "sha256": "067b7587a344a928fc6534ef66b1bcd591fc7c26d207ea7ca3334aeb678d6475",
+      "bytes": 1511
+    },
+    {
+      "path": "skills/internal-comms/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "bytes": 11345
+    },
+    {
+      "path": "skills/internal-comms/examples/3p-updates.md",
+      "sha256": "087e4363c0f3513728a7e695eeb9ead5c3ecd12a4681b59340691180e65b68fc",
+      "bytes": 3274
+    },
+    {
+      "path": "skills/internal-comms/examples/company-newsletter.md",
+      "sha256": "30f81cfbdb03858a006169c72169024089c7c5d3d32611d337782da4f38c86b5",
+      "bytes": 3295
+    },
+    {
+      "path": "skills/internal-comms/examples/faq-answers.md",
+      "sha256": "5ecd3356cd6666937f2ebefa753253edfdbdca15e368d07baf398bfcced72484",
+      "bytes": 2366
+    },
+    {
+      "path": "skills/internal-comms/examples/general-comms.md",
+      "sha256": "4d3a4bb198a77626bcf018e96b2b45a2dbabed172d4ade0fcd70d23ae8a47a47",
+      "bytes": 602
+    }
+  ]
+}

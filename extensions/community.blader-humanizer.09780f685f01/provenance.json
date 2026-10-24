@@ -1,0 +1,27 @@
+{
+  "upstream": {
+    "repository": "https://github.com/blader/humanizer",
+    "commit": "8c307f367c91bd974002f10f2be2965d642c13df",
+    "path": "."
+  },
+  "license": "MIT",
+  "changes": "Upstream: https://github.com/blader/humanizer/tree/8c307f367c91bd974002f10f2be2965d642c13df/.\nOriginal instruction: SKILL.md\nLicense: MIT; all upstream notices remain in the original text.\nSkivu adaptation (2026-10-24): JSON packaging, Chinese catalog description, and inline text references. The upstream instruction and selected references are unchanged. No upstream executable scripts are included. This package provides conversational guidance; it does not add process or filesystem execution.\n",
+  "market_entries": [
+    {
+      "id": "skill-github-com-blader-humanizer",
+      "title": "humanizer"
+    }
+  ],
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "0612f1dfb1672b0ea9b97e139bf1f06cabe98d8b27424fe8ff01e1fb4cc99cad",
+      "bytes": 32348
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "4ac4810254ab36d45419141aeb8e69bf50652cfafe5b2dab947d06d44e5cbf96",
+      "bytes": 1066
+    }
+  ]
+}

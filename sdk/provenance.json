@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/skyjjgw/skivu",
+  "commit": "46290b6b293737b243ec4e94933466ddef8a5c8a",
+  "path": "assets/plugin_sdk/skivu-sdk.js",
+  "sha256": "08264a86e9345b3ca73797ab475ff2a63ca9554244591649f2ca84c8590f7621",
+  "license": "GPL-3.0-only"
+}

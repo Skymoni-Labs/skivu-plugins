@@ -1,8 +1,8 @@
 # 社区目录
 
-2026-10-24 更新：`catalog/index.json` 已升级为 App 0.2.19 使用的 `1.0` 安装目录，格式与安装边界见 [运行格式](runtime.md)。下方 `0.1-draft` 格式保留在 `catalog/drafts.json`，不能作为安装源；仅纯文本提示词投稿继续使用旧草案。
+当前安装目录分为：`catalog/index.json`（界面预设协议 `1.0`）、`catalog/extensions.json`（技能/MCP 协议 `2.0`）、`catalog/apps.json`（开放 Web 插件协议 `3.0`）。独立插件的完整规范见[开放 SDK](open-plugin-sdk.md)，预设见[运行格式](runtime.md)。三个目录独立演进，保持旧客户端兼容。
 
-`catalog/index.json` 是机器可读的**预览目录**，不是 App 安装源。
+下方是保留在 `catalog/drafts.json` 的历史 `0.1-draft` 预览格式，不是当前 App 安装源。
 
 ```json
 {

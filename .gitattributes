@@ -1,2 +1,6 @@
 extensions/** text eol=lf
 catalog/extensions.json text eol=lf
+apps/** text eol=lf
+templates/web-plugin/** text eol=lf
+sdk/** text eol=lf
+catalog/apps.json text eol=lf

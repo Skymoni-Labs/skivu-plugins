@@ -128,6 +128,8 @@ def validate_catalog(data):
 
 
 def validate_repository():
+    from validate_web_plugins import validate as validate_web_plugins
+    validate_web_plugins()
     from validate_extensions import validate as validate_extensions
     validate_extensions()
     catalog = read_json(ROOT / "catalog/index.json", limit=1024 * 1024)

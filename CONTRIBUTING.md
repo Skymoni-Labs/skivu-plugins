@@ -4,12 +4,11 @@
 
 ## 提交新插件
 
-1. 在个人仓库公开源码、`plugin.json`、许可证和说明。敏感设置由用户在未来宿主中填写，不上传任何 Key、密码、令牌或聊天数据。
-2. 运行本仓库的 `python tools/validate.py --package <内容包目录>`。
-3. 在本仓库修改 `catalog/index.json` 的 `plugins`，按 [目录规范](docs/catalog.md) 填写固定提交和包路径。
-4. 提交 PR，说明用途、作者、原始来源、许可证、清单路径、验证结果及截图（如有）。维护者核验源码与来源后决定是否收录。
-
-当前只能提交 `preview` 条目，用户不能从当前 App 安装或执行。示例本身不自动成为市场条目；请勿把草案包装成已正式可用。
+1. 选择当前支持的格式：[Web 插件 SDK 1.0](docs/open-plugin-sdk.md)、[技能/MCP](docs/extensions.md)、[兼容界面预设](docs/runtime.md)。旧 `0.1-draft` 仅作为历史草案保留。
+2. 在自己的仓库公开完整可编辑源码、清单、许可证和说明。运行配置由用户填写，不上传 Key、密码、令牌或聊天数据。宿主服务器私有能力不作为插件 API 开放。
+3. Web 插件复制 `templates/web-plugin/`，用 `python tools/build_web_plugin.py <目录> --output <输出.skivu.json>` 打包，在 Android App 本地导入并验证；无需先加入官方目录。也可维护自己的 HTTPS 目录。
+4. 申请官方收录时提交 `apps/<id>/package.skivu.json`、来源/构建记录与完整可编辑源码，将固定提交、SHA-256 和字节数写入 `catalog/apps.json`。技能/MCP 与预设分别使用自己的目录，保持旧客户端兼容。
+5. 提交 PR 说明用途、作者、原始来源、准确许可、声明权限、最低版本、实际验证结果和截图。维护者核验后合并；示例或通过格式校验本身不等于功能通过验收。
 
 ## 修改模板与规范
 

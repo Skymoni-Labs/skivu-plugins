@@ -4,9 +4,11 @@ Skivu 社区插件共创仓库。欢迎为 [Skivu 手机 App](https://github.com
 
 **Skivu 0.2.19 起支持从 App 插件市场安装 QQ、微信界面包。** 在市场安装后开启使用，也可以关闭或卸载；角色和聊天记录继续由原 App 保存。0.2.18 及更早版本需要先更新 App。
 
+**Skivu 0.2.38 / SDK 1.0 开放独立 Web 插件。** 自带 HTML/CSS/JavaScript、资源和业务逻辑，可提供独立页面、聊天动作或整个聊天界面。宿主 API 按用户授权提供隔离存档/文件/第三方密钥、网络、角色/聊天交互和模型生成代理。无需第三方 ID/renderer 白名单，可本地导入或添加自己的目录。服务器私有能力、配置和凭据不开放。见[开放 SDK](docs/open-plugin-sdk.md)、[可复制模板](templates/web-plugin/)和[打包工具](tools/build_web_plugin.py)。实际插件包由服务器目录分发，不内置 APK。
+
 Skivu 0.2.36 新增[技能与 MCP 扩展](docs/extensions.md)：安装并主动启用任务指导，或配置自己的 HTTPS MCP 服务、选择工具手动执行。扩展目录为 `catalog/extensions.json`，协议 `2.0`。每个包保留作者、固定上游提交、许可原文、修改声明和可编辑源码。依赖未接入工具或执行环境的项目须适配后收录。
 
-界面包仍使用 `ui-preset` 和 `catalog/index.json` 协议 `1.0`，保持旧客户端兼容。安装器不会下载执行任意第三方 HTML/JavaScript。旧 `0.1-draft` 投稿格式继续保留。
+界面包仍使用 `ui-preset` 和 `catalog/index.json` 协议 `1.0`，保持旧客户端兼容；这种数据预设不执行脚本。开放插件另用 `catalog/apps.json` 协议 `3.0`，在独立运行环境执行自带 Web 代码。旧 `0.1-draft` 投稿格式继续保留。
 
 ## 开始创作
 
@@ -33,6 +35,8 @@ python tools/validate.py --package /path/to/your/plugin
 | `plugins/qq/`、`plugins/wechat/` | 首批可安装的界面包、说明与完整许可 |
 | `catalog/index.json` | App 安装目录，固定包提交、SHA-256 和字节数 |
 | `catalog/extensions.json`、`extensions/` | 技能与 MCP 扩展目录、包及源码 |
+| `catalog/apps.json`、`apps/` | 开放 Web 插件目录、完整包与来源 |
+| `templates/web-plugin/`、`sdk/` | 可编辑交互示例与 SDK 类型定义 |
 | `catalog/drafts.json` | 旧版草案目录，保持 `runtimeReady: false` |
 | `docs/` | 开发、目录收录、权限和路线说明 |
 | `tools/validate.py` | 只读取文件的格式与本地资源检查 |

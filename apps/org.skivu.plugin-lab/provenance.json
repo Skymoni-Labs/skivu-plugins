@@ -1,0 +1,27 @@
+{
+  "sourceDirectory": "templates/web-plugin",
+  "license": "GPL-3.0-only",
+  "adaptation": "Independent original example for Skivu SDK 1.0; no upstream Operit code or assets.",
+  "files": [
+    {
+      "path": "app.js",
+      "sha256": "a0ea0b36d78408e7397c7de5779c86a71dbce243c936f00140add8ccbe9039cd"
+    },
+    {
+      "path": "index.html",
+      "sha256": "5123e899dab27ac8f607d92fe18fd186a336defd7e5dcb11c03b7cc4e43f1e0d"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "0cffd6a8eefad41b82ee8216d1da6bfcbfddb8cb198bc3a058c44ad8f2b3d811"
+    },
+    {
+      "path": "style.css",
+      "sha256": "72f4953d6218640fbfd4385f24eca3da09cf7d4f4320f2fe4dd13dbd820e5b49"
+    }
+  ]
+}

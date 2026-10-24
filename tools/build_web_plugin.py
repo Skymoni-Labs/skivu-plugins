@@ -1,0 +1,80 @@
+"""Build an editable Web plugin into a deterministic .skivu.json package.
+
+This tool reads files only. It never imports or executes plugin code.
+"""
+import argparse
+import base64
+import hashlib
+import json
+import mimetypes
+from pathlib import Path
+import re
+from urllib.parse import urlparse
+
+MAX_PACKAGE=32*1024*1024
+PERMISSIONS={'storage','files','secrets','network','network.local','characters.read','characters.write','chat.read','chat.write','ai.generate','prompt','clipboard'}
+MANIFEST_KEYS={'schemaVersion','apiVersion','id','name','version','minHostVersion','author','description','license','source','entry','permissions','networkDomains','contributes'}
+
+def require(value,message):
+    if not value: raise ValueError(message)
+
+def relative(value):
+    return isinstance(value,str) and 0<len(value)<=240 and not re.search(r'[\\:\x00-\x1f]',value) and all(p not in ('','.','..') for p in value.split('/'))
+
+def manifest(raw):
+    require(isinstance(raw,dict) and set(raw)==MANIFEST_KEYS and raw['schemaVersion']==1 and raw['apiVersion']=='1.0','Unsupported manifest/API')
+    for key,limit in [('id',120),('name',100),('description',1000),('author',150),('license',150),('source',1000),('entry',240)]:
+        require(isinstance(raw[key],str) and raw[key].strip() and len(raw[key])<=limit and '\0' not in raw[key],f'Invalid {key}')
+    require(re.fullmatch(r'[a-z0-9]+(?:[.-][a-z0-9]+)+',raw['id']),'Invalid plugin ID')
+    for key in ('version','minHostVersion'):
+        require(isinstance(raw[key],str) and len(raw[key])<=30 and re.fullmatch(r'(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)',raw[key]) and all(int(p)<=2147483647 for p in raw[key].split('.')),'Invalid version')
+    u=urlparse(raw['source']);require(u.scheme=='https' and u.hostname and not u.username and not u.fragment,'Invalid source URL')
+    require(relative(raw['entry']) and raw['entry'].endswith('.html'),'Entry must be a relative HTML file')
+    permissions=raw['permissions'];domains=raw['networkDomains']
+    require(isinstance(permissions,list) and len(permissions)==len(set(permissions)) and set(permissions)<=PERMISSIONS,'Unsupported/duplicate permission')
+    require(isinstance(domains,list) and len(domains)<=100 and len(domains)==len(set(domains)) and all(isinstance(d,str) and len(d)<=253 and (d=='*' or re.fullmatch(r'(\*\.)?[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?',d)) for d in domains),'Invalid network domains')
+    require(not domains or 'network' in permissions,'Missing network permission')
+    require('network.local' not in permissions or 'network' in permissions,'Local network also needs network permission')
+    c=raw['contributes'];require(isinstance(c,dict) and set(c)<={'launcher','chatActions','chatSurface'} and isinstance(c.get('launcher'),bool) and isinstance(c.get('chatActions'),list) and len(c['chatActions'])<=20 and ('chatSurface' not in c or isinstance(c['chatSurface'],bool)),'Invalid contribution')
+    ids=set()
+    for a in c['chatActions']:
+        require(isinstance(a,dict) and set(a)=={'id','title'} and isinstance(a['id'],str) and re.fullmatch(r'[a-z0-9][a-z0-9.-]{0,79}',a['id']) and a['id'] not in ids and isinstance(a['title'],str) and 0<len(a['title'])<=80,'Invalid action')
+        ids.add(a['id'])
+    return raw
+
+def validate_package(raw):
+    require(len(raw)<=MAX_PACKAGE,'Package exceeds 32 MiB')
+    p=json.loads(raw);require(isinstance(p,dict) and set(p)=={'manifest','files','licenseText','notices'},'Invalid package keys')
+    m=manifest(p['manifest']);require(isinstance(p['licenseText'],str) and p['licenseText'].strip() and len(p['licenseText'])<=256*1024 and isinstance(p['notices'],str) and len(p['notices'])<=256*1024,'Missing license/notices')
+    require(isinstance(p['files'],dict) and len(p['files'])<=512 and m['entry'] in p['files'],'Invalid/missing resources')
+    total=0
+    for name,f in p['files'].items():
+        require(relative(name) and name!='skivu-sdk.js' and isinstance(f,dict) and set(f)=={'mime','base64'} and isinstance(f['mime'],str) and re.fullmatch(r'[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+',f['mime']),'Invalid resource')
+        data=base64.b64decode(f['base64'],validate=True);total+=len(data);require(len(data)<=8*1024*1024 and total<=24*1024*1024,'Resources exceed limits')
+    require(p['files'][m['entry']]['mime']=='text/html','Entry MIME must be text/html')
+    return p
+
+def build(directory):
+    root=Path(directory).resolve();m=manifest(json.loads((root/'manifest.json').read_text(encoding='utf-8')))
+    license=(root/'LICENSE').read_text(encoding='utf-8')
+    notices=(root/'NOTICE').read_text(encoding='utf-8') if (root/'NOTICE').exists() else f"Copyright {m['author']}\nSource: {m['source']}\nLicense: {m['license']}\n"
+    files={};total=0
+    for path in sorted(root.rglob('*')):
+        rel=path.relative_to(root).as_posix()
+        require(not path.is_symlink(),'Symlinks are not supported')
+        if not path.is_file() or rel in ('manifest.json','LICENSE','NOTICE') or any(p in ('.git','node_modules','dist','__pycache__') for p in path.relative_to(root).parts):continue
+        size=path.stat().st_size;total+=size
+        require(size<=8*1024*1024 and total<=24*1024*1024 and len(files)<512,'Resources exceed limits')
+        mime={'.js':'application/javascript','.mjs':'application/javascript','.wasm':'application/wasm','.json':'application/json','.svg':'image/svg+xml'}.get(path.suffix.lower()) or mimetypes.guess_type(path.name)[0] or 'application/octet-stream'
+        files[rel]={'mime':mime,'base64':base64.b64encode(path.read_bytes()).decode('ascii')}
+    value={'manifest':m,'files':files,'licenseText':license,'notices':notices}
+    raw=(json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode('utf-8');validate_package(raw);return raw
+
+if __name__=='__main__':
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('directory',nargs='?');parser.add_argument('--output');parser.add_argument('--check');args=parser.parse_args()
+    if args.check:
+        raw=Path(args.check).read_bytes();validate_package(raw)
+    else:
+        if not args.directory or not args.output:parser.error('directory and --output are required')
+        raw=build(args.directory);target=Path(args.output);target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(raw)
+    print(json.dumps({'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}))

@@ -1,5 +1,7 @@
 # 开发规范 0.1-draft
 
+这是保留的旧草案。当前可安装开发入口为[开放插件 SDK 1.0](open-plugin-sdk.md)，可用自带 HTML/CSS/JavaScript 的独立应用与聊天界面，支持第三方目录、本地导入和完整开发模板；技能/MCP 见 [extensions.md](extensions.md)。下文仅适用于旧 `prompt-pack` 草案，不限制新 SDK。
+
 这是独立设计的 Skivu 内容包草案，尚未冻结，也不是现有 App SDK。先支持可审阅的纯文本提示词，不声明兼容其他 App 的插件格式。
 
 ## 包结构

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "protocolVersion": "3.0",
+  "packages": [
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "apiVersion": "1.0",
+        "id": "org.skivu.plugin-lab",
+        "name": "插件实验室",
+        "version": "1.0.0",
+        "minHostVersion": "0.2.38",
+        "author": "Skivu contributors",
+        "description": "完全独立的交互页面：本地计数存档、上下文和宿主能力探测、文件导入导出。源码可复制修改，界面与逻辑不内置在 App。",
+        "license": "GPL-3.0-only",
+        "source": "https://github.com/skyjjgw/skivu-plugins/tree/main/templates/web-plugin",
+        "entry": "index.html",
+        "permissions": [
+          "storage",
+          "files"
+        ],
+        "networkDomains": [],
+        "contributes": {
+          "launcher": true,
+          "chatActions": [
+            {
+              "id": "open-lab",
+              "title": "打开插件实验室"
+            }
+          ],
+          "chatSurface": true
+        }
+      },
+      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/cd03cd8d004678be540aa89e6a3d753e52932e5d/apps/org.skivu.plugin-lab/package.skivu.json",
+      "sha256": "5ff1e1ce5d32b2d611c82802624cac7d29421f719371c31b6c96bdb93af3faca",
+      "bytes": 43088
+    }
+  ]
+}

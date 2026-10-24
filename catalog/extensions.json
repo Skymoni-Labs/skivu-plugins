@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "protocolVersion": "2.0",
+  "plugins": [
+    {
+      "schemaVersion": 1,
+      "id": "community.anthropics-skills.b02dbd96699c",
+      "name": "内部沟通写作",
+      "version": "1.0.0",
+      "author": "anthropics",
+      "license": "Apache-2.0",
+      "description": "依据内置范例，撰写项目进展、公司通讯、常见问题和内部说明。",
+      "kind": "skill",
+      "minHostVersion": "0.2.36",
+      "permissions": [
+        "prompt"
+      ],
+      "source": {
+        "repository": "https://github.com/anthropics/skills",
+        "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+        "path": "skills/internal-comms"
+      },
+      "package": {
+        "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/768b4524c0bd9dee22d835c0bff4651d0d143a9b/extensions/community.anthropics-skills.b02dbd96699c/package.json",
+        "sha256": "33c2426d9f561d08e1c17ba3727e2d6982ef5c13ce547a4fab8a93ef0deb8a68",
+        "bytes": 24351
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "community.anthropics-skills.e016d48a012c",
+      "name": "前端设计指导",
+      "version": "1.0.0",
+      "author": "anthropics",
+      "license": "Apache-2.0",
+      "description": "在对话中讨论界面视觉方向、布局、字体与文案，并生成设计建议或代码文本。",
+      "kind": "skill",
+      "minHostVersion": "0.2.36",
+      "permissions": [
+        "prompt"
+      ],
+      "source": {
+        "repository": "https://github.com/anthropics/skills",
+        "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+        "path": "skills/frontend-design"
+      },
+      "package": {
+        "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/768b4524c0bd9dee22d835c0bff4651d0d143a9b/extensions/community.anthropics-skills.e016d48a012c/package.json",
+        "sha256": "6448322c5d5e9e8faf2ce49385020e05c5c92c7e81cfb7d0cc328ca6cdc5f3b8",
+        "bytes": 21225
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "community.blader-humanizer.09780f685f01",
+      "name": "Humanizer 文字润色",
+      "version": "1.0.0",
+      "author": "blader",
+      "license": "MIT",
+      "description": "在对话中润色用户提供的文字，减少模板化表达并保留事实与原有语气。",
+      "kind": "skill",
+      "minHostVersion": "0.2.36",
+      "permissions": [
+        "prompt"
+      ],
+      "source": {
+        "repository": "https://github.com/blader/humanizer",
+        "commit": "8c307f367c91bd974002f10f2be2965d642c13df",
+        "path": "."
+      },
+      "package": {
+        "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/768b4524c0bd9dee22d835c0bff4651d0d143a9b/extensions/community.blader-humanizer.09780f685f01/package.json",
+        "sha256": "6c132494c0926bfae0f957e2e7187d03446df9cbb332422dbc9f8448f7211942",
+        "bytes": 35192
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "community.firecrawl.mcp",
+      "name": "Firecrawl 网页工具",
+      "version": "1.0.0",
+      "author": "firecrawl / Skivu adapter",
+      "license": "MIT",
+      "description": "连接 Firecrawl MCP 服务，手动调用网页搜索、抓取和解析工具。托管服务有独立用量限制。",
+      "kind": "mcp-http",
+      "minHostVersion": "0.2.36",
+      "permissions": [
+        "network"
+      ],
+      "source": {
+        "repository": "https://github.com/firecrawl/firecrawl-mcp-server",
+        "commit": "da436cccdf3f51da530350b3c15753b4742aa8a2",
+        "path": "."
+      },
+      "package": {
+        "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/768b4524c0bd9dee22d835c0bff4651d0d143a9b/extensions/community.firecrawl.mcp/package.json",
+        "sha256": "659558e698ef501ab2d16826d423ada411c813989792681850a53c8ee43a8beb",
+        "bytes": 2629
+      }
+    }
+  ]
+}

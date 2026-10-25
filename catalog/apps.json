@@ -34,6 +34,55 @@
       "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/cd03cd8d004678be540aa89e6a3d753e52932e5d/apps/org.skivu.plugin-lab/package.skivu.json",
       "sha256": "5ff1e1ce5d32b2d611c82802624cac7d29421f719371c31b6c96bdb93af3faca",
       "bytes": 43088
+    },
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "apiVersion": "1.0",
+        "id": "org.skivu.pocket-phone",
+        "name": "角色小手机",
+        "version": "1.1.1",
+        "minHostVersion": "0.2.38",
+        "author": "Skivu contributors",
+        "description": "独立小手机：21 个生活应用，按角色保存记录，支持原版存档导入、结构化角色任务、用户自选的音乐与生图服务。",
+        "license": "GPL-3.0-only",
+        "source": "https://github.com/skyjjgw/skivu-plugins/tree/main/plugins/pocket-phone",
+        "entry": "index.html",
+        "permissions": [
+          "storage",
+          "files",
+          "secrets",
+          "network",
+          "network.local",
+          "ai.generate",
+          "chat.read",
+          "chat.write"
+        ],
+        "networkDomains": [
+          "*"
+        ],
+        "contributes": {
+          "launcher": true,
+          "chatSurface": true,
+          "chatActions": [
+            {
+              "id": "open-phone",
+              "title": "打开角色小手机"
+            },
+            {
+              "id": "update-phone",
+              "title": "更新角色的小手机"
+            },
+            {
+              "id": "chat-phone",
+              "title": "与角色聊天并使用小手机"
+            }
+          ]
+        }
+      },
+      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/d174045e1b0c27e7722af8cd9e4940e001e0ae76/apps/org.skivu.pocket-phone/package.skivu.json",
+      "sha256": "b24315f66a8dd2e95e6ebd8ea851cc6d59eefdfea1ad73cd8432f815712886c1",
+      "bytes": 462410
     }
   ]
 }

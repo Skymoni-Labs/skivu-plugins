@@ -57,5 +57,12 @@
     "Deterministic POSIX-string resource order on Windows and Linux",
     "Host-independent MIME types; unknown extensions use application/octet-stream",
     "Version/about and public installation documentation updated; no business logic change"
-  ]
+  ],
+  "sourceCommit": "d174045e1b0c27e7722af8cd9e4940e001e0ae76",
+  "distribution": {
+    "catalog": "https://skymoni.com/app-plugins/catalog/apps.json",
+    "immutableUpstream": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/d174045e1b0c27e7722af8cd9e4940e001e0ae76/apps/org.skivu.pocket-phone/package.skivu.json",
+    "domesticPackage": "https://skymoni.com/app-plugins/web-packages/b24315f66a8dd2e95e6ebd8ea851cc6d59eefdfea1ad73cd8432f815712886c1.json",
+    "release": "https://github.com/skyjjgw/skivu-plugins/releases/tag/pocket-phone-v1.1.1"
+  }
 }

@@ -41,12 +41,12 @@
         "apiVersion": "1.0",
         "id": "org.skivu.pocket-phone",
         "name": "角色小手机",
-        "version": "1.1.1",
+        "version": "1.2.0",
         "minHostVersion": "0.2.38",
         "author": "Skivu contributors",
         "description": "独立小手机：21 个生活应用，按角色保存记录，支持原版存档导入、结构化角色任务、用户自选的音乐与生图服务。",
         "license": "GPL-3.0-only",
-        "source": "https://github.com/skyjjgw/skivu-plugins/tree/main/plugins/pocket-phone",
+        "source": "https://github.com/skyjjgw/skivu-pocket-phone",
         "entry": "index.html",
         "permissions": [
           "storage",
@@ -80,9 +80,9 @@
           ]
         }
       },
-      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/d174045e1b0c27e7722af8cd9e4940e001e0ae76/apps/org.skivu.pocket-phone/package.skivu.json",
-      "sha256": "b24315f66a8dd2e95e6ebd8ea851cc6d59eefdfea1ad73cd8432f815712886c1",
-      "bytes": 462410
+      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-pocket-phone/03465b72cf58b9ec81e8cb6925263a27ea4c3aa3/packages/pocket-phone-1.2.0.skivu.json",
+      "sha256": "1f657c548663f110fba653b73707ccbfeb576f7caf0894d77015773caba53c8f",
+      "bytes": 476950
     }
   ]
 }

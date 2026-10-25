@@ -1,6 +1,6 @@
 # Skivu Plugins
 
-Skivu 社区插件共创仓库。欢迎为 [Skivu 手机 App](https://github.com/skyjjgw/skivu) 创作扩展、分享源码和提交收录申请。
+Skivu 社区插件收录与 SDK 仓库。独立插件在各自仓库开发和发布，本仓库只登记其版本与安装地址。欢迎为 [Skivu 手机 App](https://github.com/skyjjgw/skivu) 创作扩展、分享源码和提交收录申请。
 
 **Skivu 0.2.19 起支持从 App 插件市场安装 QQ、微信界面包。** 在市场安装后开启使用，也可以关闭或卸载；角色和聊天记录继续由原 App 保存。0.2.18 及更早版本需要先更新 App。
 
@@ -30,7 +30,7 @@ python tools/validate.py --package /path/to/your/plugin
 
 ## 仓库内容
 
-[角色小手机 1.1.1](docs/pocket-phone.md) 提供21个角色生活应用、独立存档、音乐与可选多轮聊天面板。安装包、完整可编辑源码与构建记录均在本仓库，兼容 Skivu 0.2.38 / SDK 1.0。
+[角色小手机 1.2.0](docs/pocket-phone.md) 提供21个角色生活应用。源码、测试、安装包与发行版独立维护在 [skivu-pocket-phone](https://github.com/skyjjgw/skivu-pocket-phone)，本仓库仅收录固定提交的安装链接、清单、大小与摘要。
 
 | 路径 | 用途 |
 | --- | --- |
@@ -40,11 +40,11 @@ python tools/validate.py --package /path/to/your/plugin
 | `plugins/qq/`、`plugins/wechat/` | 首批可安装的界面包、说明与完整许可 |
 | `catalog/index.json` | App 安装目录，固定包提交、SHA-256 和字节数 |
 | `catalog/extensions.json`、`extensions/` | 技能与 MCP 扩展目录、包及源码 |
-| `catalog/apps.json`、`apps/` | 开放 Web 插件目录、完整包与来源 |
+| `catalog/apps.json`、`apps/` | 开放 Web 插件收录目录；apps 仅保留 SDK 自测示例 |
 | `templates/web-plugin/`、`sdk/` | 可编辑交互示例与 SDK 类型定义 |
 | `catalog/drafts.json` | 旧版草案目录，保持 `runtimeReady: false` |
 | `docs/` | 开发、目录收录、权限和路线说明 |
-| `tools/validate.py` | 只读取文件的格式与本地资源检查 |
+| `tools/validate.py` | 格式检查；外部收录包按固定提交下载并校验，不执行其代码 |
 
 ## 社区与官方市场
 

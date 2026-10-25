@@ -51,5 +51,12 @@
     "Simulated phone records do not operate real shopping, transfers, social accounts or navigation"
   ],
   "privateHostDataIncluded": false,
-  "hostAppReleaseRequired": false
+  "hostAppReleaseRequired": false,
+  "sourceCommit": "64bf3a104ce63ad58976e914269ffa10de9d5aad",
+  "distribution": {
+    "catalog": "https://skymoni.com/app-plugins/catalog/apps.json",
+    "immutableUpstream": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/64bf3a104ce63ad58976e914269ffa10de9d5aad/apps/org.skivu.pocket-phone/package.skivu.json",
+    "domesticPackage": "https://skymoni.com/app-plugins/web-packages/e399509025f3961b108e4e7ea1f6a1ada41d5b370872b11323e6e9da718d1eb0.json",
+    "release": "https://github.com/skyjjgw/skivu-plugins/releases/tag/pocket-phone-v1.1.0"
+  }
 }

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "protocolVersion": "3.0",
+  "packages": [
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "apiVersion": "1.0",
+        "id": "org.skivu.plugin-lab",
+        "name": "插件实验室",
+        "version": "1.0.0",
+        "minHostVersion": "0.2.38",
+        "author": "Skivu contributors",
+        "description": "完全独立的交互页面：本地计数存档、上下文和宿主能力探测、文件导入导出。源码可复制修改，界面与逻辑不内置在 App。",
+        "license": "GPL-3.0-only",
+        "source": "https://github.com/skyjjgw/skivu-plugins/tree/main/templates/web-plugin",
+        "entry": "index.html",
+        "permissions": [
+          "storage",
+          "files"
+        ],
+        "networkDomains": [],
+        "contributes": {
+          "launcher": true,
+          "chatActions": [
+            {
+              "id": "open-lab",
+              "title": "打开插件实验室"
+            }
+          ],
+          "chatSurface": true
+        }
+      },
+      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/cd03cd8d004678be540aa89e6a3d753e52932e5d/apps/org.skivu.plugin-lab/package.skivu.json",
+      "sha256": "5ff1e1ce5d32b2d611c82802624cac7d29421f719371c31b6c96bdb93af3faca",
+      "bytes": 43088
+    },
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "apiVersion": "1.0",
+        "id": "org.skivu.pocket-phone",
+        "name": "角色小手机",
+        "version": "1.3.0",
+        "minHostVersion": "0.2.39",
+        "author": "Skivu contributors",
+        "description": "角色自己的小手机：连贯生活近况、角色聊天与存档，真实音乐、书目、RSS 和系统软件链接。",
+        "license": "GPL-3.0-only",
+        "source": "https://github.com/skyjjgw/skivu-pocket-phone",
+        "entry": "index.html",
+        "permissions": [
+          "storage",
+          "files",
+          "secrets",
+          "network",
+          "network.local",
+          "ai.generate",
+          "chat.read",
+          "chat.write",
+          "external.open"
+        ],
+        "networkDomains": [
+          "*"
+        ],
+        "contributes": {
+          "launcher": true,
+          "chatSurface": true,
+          "chatActions": [
+            {
+              "id": "open-phone",
+              "title": "打开角色小手机"
+            },
+            {
+              "id": "update-phone",
+              "title": "更新角色的小手机"
+            },
+            {
+              "id": "chat-phone",
+              "title": "与角色聊天并使用小手机"
+            }
+          ]
+        }
+      },
+      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-pocket-phone/0a5a4ce0300e5c1aa912f5ef5210b48d88ffd91b/packages/pocket-phone-1.3.0.skivu.json",
+      "sha256": "4f628aec7fa21b794218c4abd7932b237040d438a46d48fb2b72d19f2e944fd5",
+      "bytes": 525464
+    }
+  ]
+}

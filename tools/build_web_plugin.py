@@ -19,7 +19,7 @@ MIME_TYPES={'.html':'text/html','.htm':'text/html','.css':'text/css',
             '.ico':'image/vnd.microsoft.icon','.woff':'font/woff','.woff2':'font/woff2',
             '.ttf':'font/ttf','.otf':'font/otf','.mp3':'audio/mpeg','.wav':'audio/wav',
             '.ogg':'audio/ogg','.mp4':'video/mp4','.webm':'video/webm','.pdf':'application/pdf'}
-PERMISSIONS={'storage','files','secrets','network','network.local','characters.read','characters.write','chat.read','chat.write','ai.generate','prompt','clipboard'}
+PERMISSIONS={'storage','files','secrets','network','network.local','characters.read','characters.write','chat.read','chat.write','ai.generate','prompt','clipboard','external.open'}
 MANIFEST_KEYS={'schemaVersion','apiVersion','id','name','version','minHostVersion','author','description','license','source','entry','permissions','networkDomains','contributes'}
 
 def require(value,message):

@@ -30,7 +30,7 @@ python tools/validate.py --package /path/to/your/plugin
 
 ## 仓库内容
 
-[角色小手机 1.2.0](docs/pocket-phone.md) 提供21个角色生活应用。源码、测试、安装包与发行版独立维护在 [skivu-pocket-phone](https://github.com/skyjjgw/skivu-pocket-phone)，本仓库仅收录固定提交的安装链接、清单、大小与摘要。
+[角色小手机 1.3.0](docs/pocket-phone.md) 提供21个角色生活应用。源码、测试、安装包与发行版独立维护在 [skivu-pocket-phone](https://github.com/skyjjgw/skivu-pocket-phone)，本仓库仅收录固定提交的安装链接、清单、大小与摘要。
 
 | 路径 | 用途 |
 | --- | --- |
@@ -40,7 +40,7 @@ python tools/validate.py --package /path/to/your/plugin
 | `plugins/qq/`、`plugins/wechat/` | 首批可安装的界面包、说明与完整许可 |
 | `catalog/index.json` | App 安装目录，固定包提交、SHA-256 和字节数 |
 | `catalog/extensions.json`、`extensions/` | 技能与 MCP 扩展目录、包及源码 |
-| `catalog/apps.json`、`apps/` | 开放 Web 插件收录目录；apps 仅保留 SDK 自测示例 |
+| `catalog/apps.json`、`catalog/apps-v2.json`、`apps/` | 开放 Web 插件收录目录；apps 仅保留 SDK 自测示例 |
 | `templates/web-plugin/`、`sdk/` | 可编辑交互示例与 SDK 类型定义 |
 | `catalog/drafts.json` | 旧版草案目录，保持 `runtimeReady: false` |
 | `docs/` | 开发、目录收录、权限和路线说明 |
@@ -53,3 +53,5 @@ python tools/validate.py --package /path/to/your/plugin
 欢迎继续提交内容包、渲染器改进和新能力提案。技能不自动获得设备权限，MCP 使用用户配置的远端 HTTP 服务。Android 专有接口、stdio 服务和本机可执行脚本需要各自的宿主适配；更改渲染器需提交 App 源码并更新 App。见 [扩展格式](docs/extensions.md)、[运行格式](docs/runtime.md) 与 [路线图](docs/roadmap.md)。
 
 原创仓库文件和内置模板采用 [GPL-3.0-only](LICENSE)。第三方独立仓库的插件以其自身声明为准；收录不会改变作者的许可证。项目中没有复用其他 App 的插件宿主或运行时代码。
+
+Skivu 0.2.40起自动迁移到 `apps-v2.json` 新版目录；`apps.json` 保留SDK1.0初版客户端可识别的1.2.0小手机与实验室，避免新增权限导致旧客户端整目录解析失败。新目录包含独立仓库的1.3.0，实际安装仍按minHostVersion校验。

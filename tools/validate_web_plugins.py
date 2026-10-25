@@ -49,15 +49,18 @@ def validate():
         require(build(preferred)==raw,'Preferred editable source differs from built package')
         for item in provenance['files']:
             file=(preferred/item['path']).resolve();require(file.is_relative_to(preferred) and hashlib.sha256(file.read_bytes()).hexdigest()==item['sha256'],'Editable source digest mismatch')
-    path=ROOT/'catalog/apps.json';entries=[]
-    if path.exists():
-        c=json.loads(path.read_bytes());require(set(c)=={'schemaVersion','protocolVersion','packages'} and c['schemaVersion']==1 and c['protocolVersion']=='3.0' and isinstance(c['packages'],list) and len(c['packages'])<=5000,'Invalid Web catalog');entries=c['packages']
-    seen=set()
-    for e in entries:
-        require(set(e)=={'manifest','url','sha256','bytes'},'Invalid catalog entry')
-        ident=e['manifest']['id'];require(ident not in seen,'Duplicate Web plugin ID');seen.add(ident)
-        validate_entry(e,packages)
-    return len(packages),len(entries)
+    count=0
+    for name in ['apps.json','apps-v2.json']:
+        path=ROOT/'catalog'/name;entries=[]
+        if path.exists():
+            c=json.loads(path.read_bytes());require(set(c)=={'schemaVersion','protocolVersion','packages'} and c['schemaVersion']==1 and c['protocolVersion']=='3.0' and isinstance(c['packages'],list) and len(c['packages'])<=5000,'Invalid Web catalog');entries=c['packages']
+        seen=set()
+        for e in entries:
+            require(set(e)=={'manifest','url','sha256','bytes'},'Invalid catalog entry')
+            ident=e['manifest']['id'];require(ident not in seen,'Duplicate Web plugin ID');seen.add(ident)
+            validate_entry(e,packages)
+        count+=len(entries)
+    return len(packages),count
 
 if __name__=='__main__':
     print('Web packages/listed:',validate())

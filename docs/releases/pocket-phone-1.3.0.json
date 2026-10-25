@@ -1,0 +1,25 @@
+{
+  "pluginId": "org.skivu.pocket-phone",
+  "version": "1.3.0",
+  "repository": "https://github.com/skyjjgw/skivu-pocket-phone",
+  "organizationFork": "https://github.com/Skymoni-Labs/skivu-pocket-phone",
+  "sourceCommit": "0a5a4ce0300e5c1aa912f5ef5210b48d88ffd91b",
+  "release": "https://github.com/skyjjgw/skivu-pocket-phone/releases/tag/v1.3.0",
+  "catalog": "https://skymoni.com/app-plugins/catalog/apps-v2.json",
+  "legacyCatalogRetains": "1.2.0",
+  "package": {
+    "bytes": 525464,
+    "sha256": "4f628aec7fa21b794218c4abd7932b237040d438a46d48fb2b72d19f2e944fd5",
+    "url": "https://raw.githubusercontent.com/skyjjgw/skivu-pocket-phone/0a5a4ce0300e5c1aa912f5ef5210b48d88ffd91b/packages/pocket-phone-1.3.0.skivu.json"
+  },
+  "validation": {
+    "businessTests": 221,
+    "browserChecks": 26,
+    "realAndroidPublicBooksAndRSS": true,
+    "realAndroidSystemOpen": true,
+    "paidRequests": 0,
+    "mockModelResponses": true,
+    "sourceZipRebuildMatches": true
+  },
+  "runtimeDependencies": []
+}

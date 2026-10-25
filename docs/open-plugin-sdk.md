@@ -59,6 +59,7 @@ Skivu 的独立 Web 插件使用 HTML/CSS/JavaScript、ES modules、Canvas、Web
 | `prompt.set` | prompt | `{text}` → 当前角色的本插件提示词贡献；仅用户启用的插件生效，可设空文本撤回 |
 | `clipboard.read/write` | clipboard | `{}` / `{text}` → 文本 / true |
 | `ui.toast` | 无 | `{text}` → true |
+| `ui.openExternal` | external.open | **宿主0.2.39起**：`{url}` → `{status:"accepted"或"cancelled"或"not_available"}`；每次由宿主确认，再交系统浏览器或关联软件 |
 
 `https.request` 支持标准 HTTP 方法、自定义端口和插件自有 Authorization/Cookie 头，不附加宿主的任何认证信息；不跟随重定向。`networkDomains` 支持精确域名、`*.example.com` 和 `*`（所有公开 HTTPS 站点）。只有声明 `network` 与 `network.local`、并得到用户授权后，才能连接用户自己的 HTTP/本机/局域网服务；可用独立的 Termux/电脑/自托管服务提供 Python、Node、stdio MCP 等能力。Skymoni 自有服务器、解析到宿主服务器的地址、云元数据和链路本地地址始终不对插件开放。解析后的连接地址固定，保留 HTTPS 证书与主机名验证，阻止重新解析与跳转越过边界。单次响应/文件 8 MiB。需要第三方账户的插件使用自己的 secrets 空间。App 不执行任意本机 shell、反射或任意 MethodChannel。
 
@@ -73,3 +74,13 @@ SDK 使用 `Skivu.on("context.changed", callback)`、`Skivu.on("host.suspend", c
 开发者可以从本地 `.skivu.json` 导入，也可添加自己的 HTTPS 目录；无需先成为官方收录作者。官方目录与第三方目录均提供固定下载 URL、SHA-256 和精确字节数。更新进行完整性校验、保留旧包、重置授权。包/目录/SDK 均在 GitHub；服务端运维配置和私有凭据不属于插件项目。
 
 开放 API 只表示插件可请求这些能力。敏感动作仍由宿主显示真实确认，插件不能用声明自行授权，不能冒充宿主系统权限窗口。
+
+## 公开链接与外部软件
+
+`ui.openExternal` 是 SDK 1.0 的增量能力，需声明 `external.open` 并通过 `host.info.methods` 探测。依赖此能力的包设置 `minHostVersion: "0.2.39"`。仅接受一个公开 HTTPS `url`，拒绝账号信息、片段、脚本、file、data 和任意 intent。打开前与确认后均检查 DNS，拒绝私网、环回、链路本地、元数据和宿主服务器目标；同时支持公开 IPv4/IPv6 解析检查。不会附带宿主认证信息，不读取外部软件 Cookie 或登录状态。
+
+`accepted` 仅表示系统接受了打开请求，不能据此声称已登录、发送、支付、下单或播放。`cancelled` 表示用户取消，`not_available` 表示系统无对应处理能力。系统浏览器/关联软件独立处理后续导航、重定向、DNS和其自身账号；插件网络代理的地址固定机制不延伸到外部软件。没有新增插件 ID、renderer 或第三方包名白名单。
+
+## 目录向前兼容
+
+0.2.40起使用官方 `https://skymoni.com/app-plugins/catalog/apps-v2.json`，自动迁移此前官方地址，保留用户第三方目录。GitHub备用路径为 `catalog/apps-v2.json`。旧 `apps.json` 及其GitHub备用内容继续提供初版宿主可解析的条目，不加入其不认识的权限。新版逐条隔离未来/异常条目，展示兼容提示，其他有效插件继续可用。两个目录都保持协议3.0并校验固定提交、完整manifest、SHA-256与大小；没有更改既有下载地址或逐插件ID特判。

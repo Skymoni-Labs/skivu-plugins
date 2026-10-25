@@ -6,12 +6,19 @@ import argparse
 import base64
 import hashlib
 import json
-import mimetypes
 from pathlib import Path
 import re
 from urllib.parse import urlparse
 
 MAX_PACKAGE=32*1024*1024
+MIME_TYPES={'.html':'text/html','.htm':'text/html','.css':'text/css',
+            '.js':'application/javascript','.mjs':'application/javascript',
+            '.wasm':'application/wasm','.json':'application/json','.svg':'image/svg+xml',
+            '.txt':'text/plain','.md':'text/markdown','.png':'image/png',
+            '.jpg':'image/jpeg','.jpeg':'image/jpeg','.gif':'image/gif','.webp':'image/webp',
+            '.ico':'image/vnd.microsoft.icon','.woff':'font/woff','.woff2':'font/woff2',
+            '.ttf':'font/ttf','.otf':'font/otf','.mp3':'audio/mpeg','.wav':'audio/wav',
+            '.ogg':'audio/ogg','.mp4':'video/mp4','.webm':'video/webm','.pdf':'application/pdf'}
 PERMISSIONS={'storage','files','secrets','network','network.local','characters.read','characters.write','chat.read','chat.write','ai.generate','prompt','clipboard'}
 MANIFEST_KEYS={'schemaVersion','apiVersion','id','name','version','minHostVersion','author','description','license','source','entry','permissions','networkDomains','contributes'}
 
@@ -59,13 +66,16 @@ def build(directory):
     license=(root/'LICENSE').read_text(encoding='utf-8')
     notices=(root/'NOTICE').read_text(encoding='utf-8') if (root/'NOTICE').exists() else f"Copyright {m['author']}\nSource: {m['source']}\nLicense: {m['license']}\n"
     files={};total=0
-    for path in sorted(root.rglob('*')):
+    # WindowsPath compares case-insensitively, unlike PosixPath. Resource order
+    # is serialized into the signed/digested package, so compare POSIX strings.
+    for path in sorted(root.rglob('*'),key=lambda p:p.relative_to(root).as_posix()):
         rel=path.relative_to(root).as_posix()
         require(not path.is_symlink(),'Symlinks are not supported')
         if not path.is_file() or rel in ('manifest.json','LICENSE','NOTICE') or any(p in ('.git','node_modules','dist','__pycache__') for p in path.relative_to(root).parts):continue
         size=path.stat().st_size;total+=size
         require(size<=8*1024*1024 and total<=24*1024*1024 and len(files)<512,'Resources exceed limits')
-        mime={'.js':'application/javascript','.mjs':'application/javascript','.wasm':'application/wasm','.json':'application/json','.svg':'image/svg+xml'}.get(path.suffix.lower()) or mimetypes.guess_type(path.name)[0] or 'application/octet-stream'
+        # The Windows registry and host /etc/mime.types are not build inputs.
+        mime=MIME_TYPES.get(path.suffix.lower(),'application/octet-stream')
         files[rel]={'mime':mime,'base64':base64.b64encode(path.read_bytes()).decode('ascii')}
     value={'manifest':m,'files':files,'licenseText':license,'notices':notices}
     raw=(json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode('utf-8');validate_package(raw);return raw

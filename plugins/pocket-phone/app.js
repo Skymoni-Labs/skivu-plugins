@@ -312,7 +312,7 @@ async function importMedia(){const c=capture();await job(async()=>{const file=aw
     await phone.importArchive(c.roleId,JSON.stringify(replace(state)),{mayCommit:()=>{check(c);if(phone.snapshot(c.roleId).revision!==state.revision)throw new Error('手机已有新记录，本次未覆盖。请重新选择图片进行关联。');return true;}});toast('原版图片已关联');}
 });}
 async function recover(){if(await confirm('恢复上一份插件备份？','会恢复所有角色的小手机记录。建议先导出需要保留的最新记录。'))await job(async()=>{await phone.recoverBackup();problem(null);toast('已恢复上一份备份');});}
-function about(){const d=dialog('关于角色小手机');d.content.append(el('p',{text:'Skivu 独立插件 1.1.0。参考 TA 的小手机 1.5.2 的功能规格，界面、存档与 SDK 适配独立实现。'}),el('p',{text:'原作者：LilyWithZYoutfear。原包未声明整体代码复用许可，本包未搬入其界面与业务代码。晨昏使用保留 BSD-2-Clause 许可的 SunCalc 1.9.0。'}),el('p',{text:'手机记录保存在本插件空间，可选择按角色分开或共用一部手机。音乐、生图使用你提供的服务与凭据，实际外联均经宿主代理；不会读取 App 的模型密钥或账号令牌。'}));d.footer.append(button('关闭',d.close));}
+function about(){const d=dialog('关于角色小手机');d.content.append(el('p',{text:'Skivu 独立插件 1.1.1。参考 TA 的小手机 1.5.2 的功能规格，界面、存档与 SDK 适配独立实现。'}),el('p',{text:'原作者：LilyWithZYoutfear。原包未声明整体代码复用许可，本包未搬入其界面与业务代码。晨昏使用保留 BSD-2-Clause 许可的 SunCalc 1.9.0。'}),el('p',{text:'手机记录保存在本插件空间，可选择按角色分开或共用一部手机。音乐、生图使用你提供的服务与凭据，实际外联均经宿主代理；不会读取 App 的模型密钥或账号令牌。'}));d.footer.append(button('关闭',d.close));}
 
 async function reloadConversation(){const c=capture();return job(async()=>{const messages=await conversation.history({limit:60});check(c);conversationMessages=messages;if(viewMode==='conversation')render();});}
 function openConversation(){if(!ctx.chatId){toast('请先在 Skivu 选择一条已有的角色聊天。');return;}viewMode='conversation';moduleId=null;render();reloadConversation();}

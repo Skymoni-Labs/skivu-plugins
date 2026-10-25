@@ -1,0 +1,61 @@
+{
+  "pluginId": "org.skivu.pocket-phone",
+  "version": "1.1.1",
+  "date": "2026-10-25",
+  "hostVerified": "0.2.38-build.42",
+  "hostSourceCommit": "46290b6b293737b243ec4e94933466ddef8a5c8a",
+  "apiVersion": "1.0",
+  "package": {
+    "path": "apps/org.skivu.pocket-phone/package.skivu.json",
+    "bytes": 462410,
+    "sha256": "b24315f66a8dd2e95e6ebd8ea851cc6d59eefdfea1ad73cd8432f815712886c1"
+  },
+  "preferredSource": "plugins/pocket-phone",
+  "provenance": "apps/org.skivu.pocket-phone/provenance.json",
+  "sourceLicense": "GPL-3.0-only",
+  "thirdPartyLicenses": [
+    "BSD-2-Clause (SunCalc 1.9.0)"
+  ],
+  "interface": {
+    "applications": 21,
+    "collections": 42,
+    "compatibilityToolNames": 31
+  },
+  "validation": {
+    "nodeTests": 202,
+    "browserMockSdkChecks": 20,
+    "interactiveMockPreviewChecks": 13,
+    "androidSdkSaveReload": true,
+    "androidSdkLoopbackSyntheticAudio": true,
+    "androidNativeConfirmedChatAppendWithMockAi": true,
+    "androidSyntheticImageFilesAndViews": true,
+    "realPaidModelImageOrMusicAccountsTested": false,
+    "paidRequests": 0,
+    "evidenceScope": "Android API36 isolated QA host build42; synthetic data. Runtime logic matches local acceptance; version/about text, line endings, public README and package serialization updated.",
+    "repositoryTests": 17
+  },
+  "permissions": [
+    "storage",
+    "files",
+    "secrets",
+    "network",
+    "network.local",
+    "ai.generate",
+    "chat.read",
+    "chat.write"
+  ],
+  "limitations": [
+    "Optional foreground plugin chat surface, not global tools registered in native chat",
+    "SDK 8 MiB per audio response; no lock-screen/background playback guarantee",
+    "No cross-instance CAS; uncertain side effects require explicit review",
+    "Third-party services require user-supplied endpoints and credentials; live accounts not tested",
+    "Simulated phone records do not operate real shopping, transfers, social accounts or navigation"
+  ],
+  "privateHostDataIncluded": false,
+  "hostAppReleaseRequired": false,
+  "changesSinceLocalPreview": [
+    "Deterministic POSIX-string resource order on Windows and Linux",
+    "Host-independent MIME types; unknown extensions use application/octet-stream",
+    "Version/about and public installation documentation updated; no business logic change"
+  ]
+}

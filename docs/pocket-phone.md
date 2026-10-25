@@ -1,8 +1,8 @@
-# 角色小手机 1.1.0
+# 角色小手机 1.1.1
 
 一部随角色保存的独立小手机：21个应用、42个集合、31个兼容工具名，页面与业务通过开放SDK运行，按需下载。需要 Skivu 0.2.38 或更新版本。
 
-在 App 的“插件市场 → 开放插件与开发者”刷新目录，选择“角色小手机”安装、启用并确认权限。也可从 [GitHub Release](https://github.com/skyjjgw/skivu-plugins/releases/tag/pocket-phone-v1.1.0) 下载 `.skivu.json` 本地导入。无需额外安装 Node、Linux 或新的 App 版本。
+在 App 的“插件市场 → 开放插件与开发者”刷新目录，选择“角色小手机”安装、启用并确认权限。也可从 [GitHub Release](https://github.com/skyjjgw/skivu-plugins/releases/tag/pocket-phone-v1.1.1) 下载 `.skivu.json` 本地导入。无需额外安装 Node、Linux 或新的 App 版本。
 
 ![Android 隔离测试宿主中的角色小手机，显示原创示例数据](images/pocket-phone-home.png)
 
@@ -20,10 +20,14 @@
 
 手机里的交易、社交、行程等是角色模拟记录，不操作真实账号或资金。工具在插件前台聊天面板运行，未向所有原生聊天全局注册自动工具。音频单次8MiB，图片5MiB，手机存档合计6MiB，聊天日志4MiB；不保证锁屏后台播放或跨页面强事务。外部服务的账号、曲库、额度和模型遵从性需用户配置后验证。
 
+## 1.1.1 构建修复
+
+正式发行使用跨系统稳定的资源排序和MIME表，修复Windows与Linux对README等文件排序不同导致包摘要不一致的问题；业务功能与本地1.1.0预览一致。1.1.0未激活到线上市场。
+
 ## 源码与验证
 
 - [完整可编辑源码与使用说明](../plugins/pocket-phone/README.md)、[测试](../tests/pocket-phone/)、[构建器](../tools/build_web_plugin.py)。
 - [来源、许可与逐文件摘要](../apps/org.skivu.pocket-phone/provenance.json)，原创实现 GPL-3.0-only；SunCalc 1.9.0 保留 BSD-2-Clause。
-- [版本验证记录](releases/pocket-phone-1.1.0.json)：202项Node测试、20项浏览器模拟SDK检查、13项本地预览检查；实际Android SDK验证存档重载、本机合成音频、原生确认聊天写入及图片。模型、生图与音乐外部账号没有付费实测，不将mock结果当作真实模型验收。
+- [版本验证记录](releases/pocket-phone-1.1.1.json)：202项Node测试、20项浏览器模拟SDK检查、13项本地预览检查；实际Android SDK验证存档重载、本机合成音频、原生确认聊天写入及图片。模型、生图与音乐外部账号没有付费实测，不将mock结果当作真实模型验收。
 
 本插件依据原版可观察功能与工具/存档接口独立实现，未复制原作者业务JS、HTML/CSS或SVG；不声称恢复了未随发行包发布的TypeScript、源映射、Git历史或外部后台。

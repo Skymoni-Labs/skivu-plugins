@@ -1,4 +1,4 @@
-# 角色小手机 1.1.0
+# 角色小手机 1.1.1
 
 独立的 Skivu SDK 1.0 插件，需要 **Skivu 0.2.38 或更新版本**。通过通用宿主运行，无需 Linux、Node 或额外服务进程。完整可编辑源码、许可证、测试与构建工具在本仓库公开提供。
 
@@ -39,8 +39,8 @@ Cookie 与生图 Key 保存在插件独立 secrets 空间。空值保留，切�
 
 ```sh
 node --test tests/pocket-phone/*.test.mjs
-python tools/build_web_plugin.py plugins/pocket-phone --output /your/output/pocket-phone-1.1.0.skivu.json
-python tools/build_web_plugin.py --check /your/output/pocket-phone-1.1.0.skivu.json
+python tools/build_web_plugin.py plugins/pocket-phone --output /your/output/pocket-phone-1.1.1.skivu.json
+python tools/build_web_plugin.py --check /your/output/pocket-phone-1.1.1.skivu.json
 ```
 
 `tests/pocket-phone/browser.cjs` 使用 `playwright-core` 与 Chromium，检查真实页面和模拟 SDK。默认使用已安装的 playwright-core 和 Chromium；可用 `PHONE_PLAYWRIGHT_PACKAGE` 指定提供 playwright-core 的 package.json、`PHONE_CHROME_PATH` 指定浏览器、`PHONE_QA_OUTPUT` 指定检查输出目录。模拟 SDK 和合成数据仅用于测试，不进入生产插件包。模拟模型测试、真实 Android 宿主测试和真实外部服务验收分别记录；不以 mock 测试代替真实账号或付费调用测试。

@@ -19,12 +19,24 @@
   ],
   "files": [
     {
+      "path": "LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "4a1b1a6ea7395fbeb1d1cb9e795a825a809cf7ac72d810425dab652e3bc11b22"
+    },
+    {
+      "path": "README.md",
+      "sha256": "d47c86def91f103b58ff6f8739cd0baac92097a7b7af6d1a62fae7d78fe4e96e"
+    },
+    {
       "path": "actions.js",
       "sha256": "5c883f45a5749eb832cf957f8126a39639fda9a49cf242f3479524e37e60fcf5"
     },
     {
       "path": "app.js",
-      "sha256": "b0f08a8d324d548478d9745c957f17620768e80b70084e388cb6ea8bcc953f2f"
+      "sha256": "2c65d6cabc6da917cf3b8cbd0afac223d6a8ad577a809168155126c33bec128e"
     },
     {
       "path": "collections.js",
@@ -51,24 +63,12 @@
       "sha256": "8770db4bfaba2cf8f84da6b12f76c383f158d37a43126d4cf3c029cd9b35200d"
     },
     {
-      "path": "LICENSE",
-      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
-    },
-    {
       "path": "manifest.json",
-      "sha256": "2eb193b65e4d78bb5b4add47ffa0dbed3ea66fcec9a56e007ec6c21e151eb44e"
-    },
-    {
-      "path": "NOTICE",
-      "sha256": "4a1b1a6ea7395fbeb1d1cb9e795a825a809cf7ac72d810425dab652e3bc11b22"
+      "sha256": "14146ec87b644d53aa375487793e3f88ce90e50c48936a73426525149deee0e9"
     },
     {
       "path": "package.json",
-      "sha256": "3e9fa983ea86d76e2884f1bc20a96578f07272361bd95b0764dd053a9be6392b"
-    },
-    {
-      "path": "README.md",
-      "sha256": "9bf6f1e87a71984fb76dc2bc455a97faae4b46ccfd21a61b1b43a5f5ff8f8860"
+      "sha256": "62a8957a9f83dc7df0dae6c09fd0548e64be0e445c04b306f1203bf4396ba43d"
     },
     {
       "path": "scoped-store.js",

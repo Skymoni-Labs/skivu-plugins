@@ -1,0 +1,32 @@
+Skivu role pocket phone, independent implementation, Copyright 2026 Skivu contributors.
+Original files in this plugin, except vendor/suncalc.js and its license, are GPL-3.0-only.
+
+Behavioral reference: TA's pocket phone / 小手机, Operit ToolPkg 1.5.2.
+Declared original author: LilyWithZYoutfear.
+Reference release: https://github.com/LilyWithZYoutfear/OperitForge/releases/tag/package-com-operit-toolpkg-pocket-phone-v1.5.2
+Reference archive SHA-256: fcf75cfd0fe07ee0e99f6f2c76766f773751a7303efbdfa5b388a785d19eb9ac
+REA recovered the shipped files and documented their tool/storage interfaces.
+No original application JavaScript, HTML/CSS, SVG icons, Operit host or runtime
+was copied into this independent plugin. Identifiers and field names implement
+the compatibility interface. The independent implementation is not a new license
+grant over the original ToolPkg, whose overall reuse license was not supplied.
+
+SunCalc 1.9.0, Copyright (c) 2014 Vladimir Agafonkin, BSD-2-Clause.
+Upstream: https://github.com/mourner/suncalc/tree/v1.9.0
+Included: vendor/suncalc.js, vendor/SUNCALC-LICENSE.txt.
+The original copyright, redistribution terms and disclaimer are retained.
+
+Skivu Open Plugin SDK API 1.0 is supplied by the host. The SDK implementation
+is not copied into the plugin bundle. All server authentication remains in the host.
+
+Changes from the behavioral reference:
+- Standalone ES-module plugin; no Operit terminal, Compose DSL, Linux or Node runtime.
+- Role-separated data by default; explicit shared-phone mode with guarded mode changes.
+- Independent responsive UI and symbols; 21 modules / 42 collections / 31 tool names.
+- Strict structured role tasks through opaque ai.generate, five actions per transaction.
+- Foreground chat surface uses confirmed host chat read/append and up to six AI rounds.
+  Durable intent/receipt journals avoid automatically replaying uncertain side effects.
+- Specialized calendar, map, media, social, recipe, shopping and ledger interfaces.
+- Plugin-specific secure credentials and host-proxied networking only.
+- Explicit loopback HTTP music backends use network.local; image services stay HTTPS.
+- Portable schema-1 records and optional image backup; explicit corruption recovery.

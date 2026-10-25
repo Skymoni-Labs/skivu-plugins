@@ -4,3 +4,5 @@ apps/** text eol=lf
 templates/web-plugin/** text eol=lf
 sdk/** text eol=lf
 catalog/apps.json text eol=lf
+plugins/pocket-phone/** text eol=lf
+tests/pocket-phone/** text eol=lf

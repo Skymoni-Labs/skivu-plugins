@@ -1,0 +1,106 @@
+{
+  "sourceDirectory": "plugins/pocket-phone",
+  "license": "GPL-3.0-only",
+  "adaptation": "Independently authored Skivu SDK 1.0 implementation from observable pocket-phone 1.5.2 behavior and compatibility interfaces; no original application JS, HTML/CSS or SVG copied.",
+  "behavioralReference": {
+    "author": "LilyWithZYoutfear",
+    "release": "https://github.com/LilyWithZYoutfear/OperitForge/releases/tag/package-com-operit-toolpkg-pocket-phone-v1.5.2",
+    "archiveSha256": "fcf75cfd0fe07ee0e99f6f2c76766f773751a7303efbdfa5b388a785d19eb9ac",
+    "reuseLicense": "Not supplied; original application implementation is not included"
+  },
+  "thirdParty": [
+    {
+      "name": "SunCalc",
+      "version": "1.9.0",
+      "license": "BSD-2-Clause",
+      "source": "https://github.com/mourner/suncalc/tree/v1.9.0",
+      "licenseFile": "vendor/SUNCALC-LICENSE.txt"
+    }
+  ],
+  "files": [
+    {
+      "path": "actions.js",
+      "sha256": "5c883f45a5749eb832cf957f8126a39639fda9a49cf242f3479524e37e60fcf5"
+    },
+    {
+      "path": "app.js",
+      "sha256": "b0f08a8d324d548478d9745c957f17620768e80b70084e388cb6ea8bcc953f2f"
+    },
+    {
+      "path": "collections.js",
+      "sha256": "3646e98d4bc7275d4954e709a7c29ef97ac027cc41aacc322af4767bef5746ef"
+    },
+    {
+      "path": "conversation.js",
+      "sha256": "3359b8ec9e16196cc5298a18038ccf5ccb3aff5a683e293808572f8cc37c7250"
+    },
+    {
+      "path": "engine.js",
+      "sha256": "56dbba5c110d206bdbc76b213b08d62e6d96f142b263f14159d922dec89ba32f"
+    },
+    {
+      "path": "host.js",
+      "sha256": "27236f745927c3e9950d0704d150a22490536df700958d9581eb625f605bf1d0"
+    },
+    {
+      "path": "index.html",
+      "sha256": "d65df4ab70212f0b7675aa086e4e245822ffc2ef49c1eeee887815a9e0633a06"
+    },
+    {
+      "path": "json-state.js",
+      "sha256": "8770db4bfaba2cf8f84da6b12f76c383f158d37a43126d4cf3c029cd9b35200d"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "2eb193b65e4d78bb5b4add47ffa0dbed3ea66fcec9a56e007ec6c21e151eb44e"
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "4a1b1a6ea7395fbeb1d1cb9e795a825a809cf7ac72d810425dab652e3bc11b22"
+    },
+    {
+      "path": "package.json",
+      "sha256": "3e9fa983ea86d76e2884f1bc20a96578f07272361bd95b0764dd053a9be6392b"
+    },
+    {
+      "path": "README.md",
+      "sha256": "9bf6f1e87a71984fb76dc2bc455a97faae4b46ccfd21a61b1b43a5f5ff8f8860"
+    },
+    {
+      "path": "scoped-store.js",
+      "sha256": "73b848ce548ea9cdcc4d26ec1d22b8991cdd81289f5db8732366266257c91452"
+    },
+    {
+      "path": "services.js",
+      "sha256": "f01d5e76516b47999effef7ac1152bcfcfc19cc30e342ac42ae3cb85cd0bd038"
+    },
+    {
+      "path": "style.css",
+      "sha256": "bae51ff2a8ee53d41b848a5c4e36fe8ad4dc6fb3cec71ad7fea0cfb55c737105"
+    },
+    {
+      "path": "vendor/SUNCALC-LICENSE.txt",
+      "sha256": "9010b843aad8e450890fc18dae2dfec00e68c10da775515801c42878afbb0da1"
+    },
+    {
+      "path": "vendor/suncalc.js",
+      "sha256": "5bfe4127cb91b7436295135d491e2d8abeccacbc8c4d450fb30771183b1e24d2"
+    },
+    {
+      "path": "view-state.js",
+      "sha256": "3b8f37c138c2cc0ea81b609b39b089d01110c5dac72249f5b9bfff1e1879bae9"
+    },
+    {
+      "path": "views.css",
+      "sha256": "f198e12d8abf377e18769506c6695c2ac8813e4ed037aec4cab7a8c74ab214c8"
+    },
+    {
+      "path": "views.js",
+      "sha256": "b6cf41f0f7f1dce6f0b0311986119a3d4f243c35b43a6669e02dc0dee54502e4"
+    }
+  ]
+}

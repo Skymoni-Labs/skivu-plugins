@@ -1,0 +1,55 @@
+{
+  "pluginId": "org.skivu.pocket-phone",
+  "version": "1.1.0",
+  "date": "2026-10-25",
+  "hostVerified": "0.2.38-build.42",
+  "hostSourceCommit": "46290b6b293737b243ec4e94933466ddef8a5c8a",
+  "apiVersion": "1.0",
+  "package": {
+    "path": "apps/org.skivu.pocket-phone/package.skivu.json",
+    "bytes": 462410,
+    "sha256": "e399509025f3961b108e4e7ea1f6a1ada41d5b370872b11323e6e9da718d1eb0"
+  },
+  "preferredSource": "plugins/pocket-phone",
+  "provenance": "apps/org.skivu.pocket-phone/provenance.json",
+  "sourceLicense": "GPL-3.0-only",
+  "thirdPartyLicenses": [
+    "BSD-2-Clause (SunCalc 1.9.0)"
+  ],
+  "interface": {
+    "applications": 21,
+    "collections": 42,
+    "compatibilityToolNames": 31
+  },
+  "validation": {
+    "nodeTests": 202,
+    "browserMockSdkChecks": 20,
+    "interactiveMockPreviewChecks": 13,
+    "androidSdkSaveReload": true,
+    "androidSdkLoopbackSyntheticAudio": true,
+    "androidNativeConfirmedChatAppendWithMockAi": true,
+    "androidSyntheticImageFilesAndViews": true,
+    "realPaidModelImageOrMusicAccountsTested": false,
+    "paidRequests": 0,
+    "evidenceScope": "Android API36 isolated QA host build42; synthetic data. Executable resources match the local acceptance package after LF normalization; only package README was updated for public installation."
+  },
+  "permissions": [
+    "storage",
+    "files",
+    "secrets",
+    "network",
+    "network.local",
+    "ai.generate",
+    "chat.read",
+    "chat.write"
+  ],
+  "limitations": [
+    "Optional foreground plugin chat surface, not global tools registered in native chat",
+    "SDK 8 MiB per audio response; no lock-screen/background playback guarantee",
+    "No cross-instance CAS; uncertain side effects require explicit review",
+    "Third-party services require user-supplied endpoints and credentials; live accounts not tested",
+    "Simulated phone records do not operate real shopping, transfers, social accounts or navigation"
+  ],
+  "privateHostDataIncluded": false,
+  "hostAppReleaseRequired": false
+}

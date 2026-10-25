@@ -30,6 +30,8 @@ python tools/validate.py --package /path/to/your/plugin
 
 ## 仓库内容
 
+[角色小手机 1.1.0](docs/pocket-phone.md) 提供21个角色生活应用、独立存档、音乐与可选多轮聊天面板。安装包、完整可编辑源码与构建记录均在本仓库，兼容 Skivu 0.2.38 / SDK 1.0。
+
 | 路径 | 用途 |
 | --- | --- |
 | `templates/prompt-pack/` | 可复制的提示词内容包模板 |

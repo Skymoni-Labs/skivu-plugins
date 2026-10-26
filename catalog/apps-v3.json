@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "protocolVersion": "3.0",
+  "packages": [
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "apiVersion": "1.0",
+        "id": "org.skivu.plugin-lab",
+        "name": "插件实验室",
+        "version": "1.0.0",
+        "minHostVersion": "0.2.38",
+        "author": "Skivu contributors",
+        "description": "完全独立的交互页面：本地计数存档、上下文和宿主能力探测、文件导入导出。源码可复制修改，界面与逻辑不内置在 App。",
+        "license": "GPL-3.0-only",
+        "source": "https://github.com/skyjjgw/skivu-plugins/tree/main/templates/web-plugin",
+        "entry": "index.html",
+        "permissions": [
+          "storage",
+          "files"
+        ],
+        "networkDomains": [],
+        "contributes": {
+          "launcher": true,
+          "chatActions": [
+            {
+              "id": "open-lab",
+              "title": "打开插件实验室"
+            }
+          ],
+          "chatSurface": true
+        }
+      },
+      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-plugins/cd03cd8d004678be540aa89e6a3d753e52932e5d/apps/org.skivu.plugin-lab/package.skivu.json",
+      "sha256": "5ff1e1ce5d32b2d611c82802624cac7d29421f719371c31b6c96bdb93af3faca",
+      "bytes": 43088
+    },
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "apiVersion": "1.0",
+        "id": "org.skivu.pocket-phone",
+        "name": "角色小手机",
+        "version": "1.4.0",
+        "minHostVersion": "0.2.41",
+        "author": "Skivu contributors",
+        "description": "角色随身的小手机：正常聊天中按需使用，角色与故事分别绑定，主动打开查看生活记录。",
+        "license": "GPL-3.0-only",
+        "source": "https://github.com/skyjjgw/skivu-pocket-phone",
+        "entry": "index.html",
+        "permissions": [
+          "storage",
+          "files",
+          "secrets",
+          "network",
+          "network.local",
+          "ai.generate",
+          "chat.read",
+          "chat.write",
+          "external.open",
+          "chat.tools"
+        ],
+        "networkDomains": [
+          "*"
+        ],
+        "contributes": {
+          "launcher": false,
+          "chatSurface": false,
+          "chatActions": [
+            {
+              "id": "open-phone",
+              "title": "TA 的手机"
+            }
+          ],
+          "roleCompanion": {
+            "title": "TA 的手机",
+            "entry": "companion.html",
+            "tools": [
+              {
+                "id": "read_phone",
+                "effect": "read",
+                "description": "读取当前角色在当前故事的手机记录和字段说明。先读取相关集合再写入。不会读取私密空间、真实软件账号或设备数据。",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "module": {
+                      "type": "string",
+                      "maxLength": 80
+                    },
+                    "collection": {
+                      "type": "string",
+                      "maxLength": 100
+                    }
+                  },
+                  "required": [],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "id": "save_record",
+                "effect": "write",
+                "description": "按用户要求或已发生的角色剧情保存一条手机记录。先read_phone取得集合及必需字段。record不带id为新增；修改时必须使用读到的现有id。不得伪造现实平台订单/私聊/支付完成。保存成功后返回可打开卡片；不删除记录。",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "collection": {
+                      "type": "string",
+                      "maxLength": 100
+                    },
+                    "record": {
+                      "type": "object",
+                      "properties": {},
+                      "required": [],
+                      "additionalProperties": true
+                    },
+                    "source": {
+                      "type": "string",
+                      "maxLength": 30,
+                      "enum": [
+                        "conversation",
+                        "role_story"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "collection",
+                    "record",
+                    "source"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "id": "phone_search_books",
+                "effect": "read",
+                "description": "按用户要求真实查询Open Library公开书目，返回作品信息；不代表角色已经阅读。",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "keywords": {
+                      "type": "string",
+                      "maxLength": 200
+                    }
+                  },
+                  "required": [
+                    "keywords"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "id": "phone_read_feed",
+                "effect": "read",
+                "description": "读取这个角色已配置的公开RSS，source为browser或xiaoyuzhou。返回真实订阅内容；不代表角色亲历。",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "source": {
+                      "type": "string",
+                      "maxLength": 30,
+                      "enum": [
+                        "browser",
+                        "xiaoyuzhou"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "source"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "id": "phone_open_software",
+                "effect": "external",
+                "description": "用户明确要求时，经宿主确认打开已知软件官网或受控搜索。accepted仅表示系统接收，不表示已登录、下单、付款、发布或播放。",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "app": {
+                      "type": "string",
+                      "maxLength": 40
+                    },
+                    "query": {
+                      "type": "string",
+                      "maxLength": 200
+                    }
+                  },
+                  "required": [
+                    "app"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          }
+        }
+      },
+      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-pocket-phone/3b218b5255267e286596eb646b167b475bf6e86b/packages/pocket-phone-1.4.0.skivu.json",
+      "sha256": "ce58d4d6ba3eab8216fdf034e7949f9f1a4657e5fc8d7b24e92d0bcb6ae1b17c",
+      "bytes": 548140
+    }
+  ]
+}

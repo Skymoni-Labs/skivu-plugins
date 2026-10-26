@@ -10,6 +10,24 @@ spec=importlib.util.spec_from_file_location('web_plugin',ROOT/'tools/build_web_p
 web=importlib.util.module_from_spec(spec);spec.loader.exec_module(web)
 
 class WebPluginTests(unittest.TestCase):
+    def role_package(self):
+        p=json.loads(web.build(ROOT/'templates/web-plugin'));m=p['manifest'];m['minHostVersion']='0.2.41';m['permissions'].append('chat.tools');m['contributes']['roleCompanion']={'title':'Role item','entry':'runtime.html','tools':[{'id':'read_note','description':'Read own role note','effect':'read','parameters':{'type':'object','properties':{},'required':[],'additionalProperties':False}}]};p['files']['runtime.html']=p['files']['index.html'];return p
+    def test_role_companion_uses_generic_package_entry(self):
+        p=self.role_package();self.assertEqual(web.validate_package(json.dumps(p).encode())['manifest']['contributes']['roleCompanion']['entry'],'runtime.html')
+    def test_role_companion_requires_explicit_permission_new_host_and_real_resource(self):
+        for change in ('permission','version','entry'):
+            with self.subTest(change=change):
+                p=self.role_package()
+                if change=='permission':p['manifest']['permissions'].remove('chat.tools')
+                if change=='version':p['manifest']['minHostVersion']='0.2.40'
+                if change=='entry':del p['files']['runtime.html']
+                with self.assertRaises(ValueError):web.validate_package(json.dumps(p).encode())
+    def test_role_schema_rejects_unknown_keywords_and_unbounded_objects(self):
+        for field in ('additionalProperties','properties','required'):
+            p=self.role_package();del p['manifest']['contributes']['roleCompanion']['tools'][0]['parameters'][field]
+            with self.assertRaises(ValueError):web.validate_package(json.dumps(p).encode())
+        p=self.role_package();p['manifest']['contributes']['roleCompanion']['tools'][0]['parameters']['pattern']='.*'
+        with self.assertRaises(ValueError):web.validate_package(json.dumps(p).encode())
     def test_resource_order_and_mimes_do_not_depend_on_platform(self):
         with tempfile.TemporaryDirectory() as temporary:
             target=Path(temporary)

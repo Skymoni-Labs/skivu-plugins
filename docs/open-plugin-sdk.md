@@ -44,6 +44,7 @@ Skivu 的独立 Web 插件使用 HTML/CSS/JavaScript、ES modules、Canvas、Web
 | `context.get` | 无 | 用户在宿主选择的 `{roleId, roleName, chatId, action}`，不含角色私密设定或聊天正文 |
 | `storage.get` | storage | `{key}` → JSON 值或 null |
 | `storage.set` | storage | `{key,value}` → true；原子持久化；单值最多 10 MiB、每插件存储最多 64 MiB |
+| `storage.compareAndSet` | storage | **0.2.41起**：`{key,expected,value}` → true；原子比较JSON再保存，冲突返回REVISION_CONFLICT |
 | `storage.remove` / `storage.keys` | storage | `{key}` / `{}`；仅自己的空间 |
 | `secrets.get/set/remove` | secrets | `{key,value?}`；仅插件自己的安全存储，禁止访问宿主密钥 |
 | `fs.read/write/list/remove` | files | `{path,base64?}`；插件自己的相对路径工作区，读返回 `{base64}`，list 返回路径；禁止绝对路径和目录穿越 |
@@ -60,6 +61,8 @@ Skivu 的独立 Web 插件使用 HTML/CSS/JavaScript、ES modules、Canvas、Web
 | `clipboard.read/write` | clipboard | `{}` / `{text}` → 文本 / true |
 | `ui.toast` | 无 | `{text}` → true |
 | `ui.openExternal` | external.open | **宿主0.2.39起**：`{url}` → `{status:"accepted"或"cancelled"或"not_available"}`；每次由宿主确认，再交系统浏览器或关联软件 |
+| `ui.chatDraft` | chat.write | **0.2.41起**：`{text}` → `{saved:true,sent:false}`；保留并追加原会话草稿，返回正常聊天，不自动发送 |
+| `ui.roleSettings` | 无 | **0.2.41起**：打开当前角色的随身插件绑定设置，无自动授权 |
 
 `https.request` 支持标准 HTTP 方法、自定义端口和插件自有 Authorization/Cookie 头，不附加宿主的任何认证信息；不跟随重定向。`networkDomains` 支持精确域名、`*.example.com` 和 `*`（所有公开 HTTPS 站点）。只有声明 `network` 与 `network.local`、并得到用户授权后，才能连接用户自己的 HTTP/本机/局域网服务；可用独立的 Termux/电脑/自托管服务提供 Python、Node、stdio MCP 等能力。Skymoni 自有服务器、解析到宿主服务器的地址、云元数据和链路本地地址始终不对插件开放。解析后的连接地址固定，保留 HTTPS 证书与主机名验证，阻止重新解析与跳转越过边界。单次响应/文件 8 MiB。需要第三方账户的插件使用自己的 secrets 空间。App 不执行任意本机 shell、反射或任意 MethodChannel。
 
@@ -82,5 +85,7 @@ SDK 使用 `Skivu.on("context.changed", callback)`、`Skivu.on("host.suspend", c
 `accepted` 仅表示系统接受了打开请求，不能据此声称已登录、发送、支付、下单或播放。`cancelled` 表示用户取消，`not_available` 表示系统无对应处理能力。系统浏览器/关联软件独立处理后续导航、重定向、DNS和其自身账号；插件网络代理的地址固定机制不延伸到外部软件。没有新增插件 ID、renderer 或第三方包名白名单。
 
 ## 目录向前兼容
+
+0.2.41新增[角色随身插件](role-companion-sdk.md)：页面按需打开，正常聊天中的工具短时执行。须声明chat.tools/roleCompanion并由用户逐角色绑定和开启随聊能力；不会因为全局启用就运行，也不在App退出后定时生成。新版目录为apps-v3.json，精确迁移此前两个官方目录URL，保留第三方目录。旧apps.json和apps-v2.json分别保留原客户端可解析内容。
 
 0.2.40起使用官方 `https://skymoni.com/app-plugins/catalog/apps-v2.json`，自动迁移此前官方地址，保留用户第三方目录。GitHub备用路径为 `catalog/apps-v2.json`。旧 `apps.json` 及其GitHub备用内容继续提供初版宿主可解析的条目，不加入其不认识的权限。新版逐条隔离未来/异常条目，展示兼容提示，其他有效插件继续可用。两个目录都保持协议3.0并校验固定提交、完整manifest、SHA-256与大小；没有更改既有下载地址或逐插件ID特判。

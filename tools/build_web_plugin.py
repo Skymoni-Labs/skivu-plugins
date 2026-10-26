@@ -19,7 +19,7 @@ MIME_TYPES={'.html':'text/html','.htm':'text/html','.css':'text/css',
             '.ico':'image/vnd.microsoft.icon','.woff':'font/woff','.woff2':'font/woff2',
             '.ttf':'font/ttf','.otf':'font/otf','.mp3':'audio/mpeg','.wav':'audio/wav',
             '.ogg':'audio/ogg','.mp4':'video/mp4','.webm':'video/webm','.pdf':'application/pdf'}
-PERMISSIONS={'storage','files','secrets','network','network.local','characters.read','characters.write','chat.read','chat.write','ai.generate','prompt','clipboard','external.open'}
+PERMISSIONS={'storage','files','secrets','network','network.local','characters.read','characters.write','chat.read','chat.write','ai.generate','prompt','clipboard','external.open','chat.tools'}
 MANIFEST_KEYS={'schemaVersion','apiVersion','id','name','version','minHostVersion','author','description','license','source','entry','permissions','networkDomains','contributes'}
 
 def require(value,message):
@@ -27,6 +27,28 @@ def require(value,message):
 
 def relative(value):
     return isinstance(value,str) and 0<len(value)<=240 and not re.search(r'[\\:\x00-\x1f]',value) and all(p not in ('','.','..') for p in value.split('/'))
+
+def tool_schema(value,depth=0):
+    require(depth<=6 and isinstance(value,dict) and set(value)<={'type','properties','required','additionalProperties','items','enum','maxLength','maxItems','description'},'Invalid tool schema')
+    require(value.get('type') in ('object','array','string','number','integer','boolean'),'Invalid tool parameter type')
+    if 'description' in value:require(isinstance(value['description'],str) and len(value['description'])<=1000,'Invalid parameter description')
+    if 'enum' in value:require(isinstance(value['enum'],list) and 0<len(value['enum'])<=64 and all(not isinstance(v,(dict,list)) for v in value['enum']),'Invalid parameter enum')
+    for key,limit in [('maxLength',12000),('maxItems',100)]:
+        if key in value:require(type(value[key]) is int and 1<=value[key]<=limit,'Invalid parameter limit')
+    if value['type']=='object':
+        props=value.get('properties');required=value.get('required')
+        require(isinstance(props,dict) and len(props)<=30 and isinstance(required,list) and all(isinstance(k,str) and k in props for k in required) and type(value.get('additionalProperties')) is bool,'Invalid object parameters')
+        for key,nested in props.items():
+            require(re.fullmatch(r'[a-zA-Z][a-zA-Z0-9_]{0,79}',key),'Invalid parameter name');tool_schema(nested,depth+1)
+    if value['type']=='array':tool_schema(value.get('items'),depth+1)
+
+def companion(raw,permissions,minimum):
+    require(isinstance(raw,dict) and set(raw)=={'title','entry','tools'} and isinstance(raw['title'],str) and 0<len(raw['title'])<=80 and relative(raw['entry']) and raw['entry'].endswith('.html'),'Invalid companion')
+    require('chat.tools' in permissions and tuple(map(int,minimum.split('.')))>=(0,2,41),'Companion requires chat.tools and host 0.2.41')
+    require(isinstance(raw['tools'],list) and 0<len(raw['tools'])<=20,'Invalid companion tools');ids=set()
+    for tool in raw['tools']:
+        require(isinstance(tool,dict) and set(tool)=={'id','description','effect','parameters'} and isinstance(tool['id'],str) and re.fullmatch(r'[a-z][a-z0-9_]{0,59}',tool['id']) and tool['id'] not in ids and isinstance(tool['description'],str) and 0<len(tool['description'])<=1200 and tool['effect'] in ('read','write','external'),'Invalid companion tool')
+        ids.add(tool['id']);tool_schema(tool['parameters']);require(tool['parameters']['type']=='object','Tool arguments must be object')
 
 def manifest(raw):
     require(isinstance(raw,dict) and set(raw)==MANIFEST_KEYS and raw['schemaVersion']==1 and raw['apiVersion']=='1.0','Unsupported manifest/API')
@@ -42,7 +64,8 @@ def manifest(raw):
     require(isinstance(domains,list) and len(domains)<=100 and len(domains)==len(set(domains)) and all(isinstance(d,str) and len(d)<=253 and (d=='*' or re.fullmatch(r'(\*\.)?[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?',d)) for d in domains),'Invalid network domains')
     require(not domains or 'network' in permissions,'Missing network permission')
     require('network.local' not in permissions or 'network' in permissions,'Local network also needs network permission')
-    c=raw['contributes'];require(isinstance(c,dict) and set(c)<={'launcher','chatActions','chatSurface'} and isinstance(c.get('launcher'),bool) and isinstance(c.get('chatActions'),list) and len(c['chatActions'])<=20 and ('chatSurface' not in c or isinstance(c['chatSurface'],bool)),'Invalid contribution')
+    c=raw['contributes'];require(isinstance(c,dict) and set(c)<={'launcher','chatActions','chatSurface','roleCompanion'} and isinstance(c.get('launcher'),bool) and isinstance(c.get('chatActions'),list) and len(c['chatActions'])<=20 and ('chatSurface' not in c or isinstance(c['chatSurface'],bool)),'Invalid contribution')
+    if 'roleCompanion' in c:companion(c['roleCompanion'],permissions,raw['minHostVersion'])
     ids=set()
     for a in c['chatActions']:
         require(isinstance(a,dict) and set(a)=={'id','title'} and isinstance(a['id'],str) and re.fullmatch(r'[a-z0-9][a-z0-9.-]{0,79}',a['id']) and a['id'] not in ids and isinstance(a['title'],str) and 0<len(a['title'])<=80,'Invalid action')
@@ -59,6 +82,7 @@ def validate_package(raw):
         require(relative(name) and name!='skivu-sdk.js' and isinstance(f,dict) and set(f)=={'mime','base64'} and isinstance(f['mime'],str) and re.fullmatch(r'[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+',f['mime']),'Invalid resource')
         data=base64.b64decode(f['base64'],validate=True);total+=len(data);require(len(data)<=8*1024*1024 and total<=24*1024*1024,'Resources exceed limits')
     require(p['files'][m['entry']]['mime']=='text/html','Entry MIME must be text/html')
+    if 'roleCompanion' in m['contributes']:require(p['files'].get(m['contributes']['roleCompanion']['entry'],{}).get('mime')=='text/html','Missing companion entry')
     return p
 
 def build(directory):

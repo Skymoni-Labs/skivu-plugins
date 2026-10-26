@@ -50,7 +50,7 @@ def validate():
         for item in provenance['files']:
             file=(preferred/item['path']).resolve();require(file.is_relative_to(preferred) and hashlib.sha256(file.read_bytes()).hexdigest()==item['sha256'],'Editable source digest mismatch')
     count=0
-    for name in ['apps.json','apps-v2.json']:
+    for name in ['apps.json','apps-v2.json','apps-v3.json']:
         path=ROOT/'catalog'/name;entries=[]
         if path.exists():
             c=json.loads(path.read_bytes());require(set(c)=={'schemaVersion','protocolVersion','packages'} and c['schemaVersion']==1 and c['protocolVersion']=='3.0' and isinstance(c['packages'],list) and len(c['packages'])<=5000,'Invalid Web catalog');entries=c['packages']

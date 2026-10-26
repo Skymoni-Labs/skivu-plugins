@@ -99,7 +99,7 @@
               {
                 "id": "save_record",
                 "effect": "write",
-                "description": "按用户要求或已发生的角色剧情保存一条手机记录。先read_phone取得集合及必需字段。record不带id为新增；修改时必须使用读到的现有id。不得伪造现实平台订单/私聊/支付完成。保存成功后返回可打开卡片；不删除记录。",
+                "description": "按用户要求或已发生的角色剧情保存一条手机记录。先read_phone取得集合及必需字段。record不带id为新增；修改时必须使用读到的现有id。不得伪造现实平台订单/私聊/支付完成。保存成功后返回可打开卡片；不删除记录。 修改已有id时必须携带最近一次read_phone返回的expected_revision；版本变化须先重新读取，不能覆盖用户新编辑。",
                 "parameters": {
                   "type": "object",
                   "properties": {
@@ -120,6 +120,10 @@
                         "conversation",
                         "role_story"
                       ]
+                    },
+                    "expected_revision": {
+                      "type": "integer",
+                      "description": "修改已有记录时，填写最近一次read_phone返回的revision。新增可省略。"
                     }
                   },
                   "required": [
@@ -196,9 +200,9 @@
           }
         }
       },
-      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-pocket-phone/3b218b5255267e286596eb646b167b475bf6e86b/packages/pocket-phone-1.4.0.skivu.json",
-      "sha256": "ce58d4d6ba3eab8216fdf034e7949f9f1a4657e5fc8d7b24e92d0bcb6ae1b17c",
-      "bytes": 548140
+      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-pocket-phone/4d95f4c9f7653e82224454ead7199e7cef8e55de/packages/pocket-phone-1.4.0.skivu.json",
+      "sha256": "fd2e210a078d967c5d8282b4626af94b9a0f76c02fbc3dac4765cfd74123f0e8",
+      "bytes": 549045
     }
   ]
 }

@@ -19,7 +19,7 @@ MIME_TYPES={'.html':'text/html','.htm':'text/html','.css':'text/css',
             '.ico':'image/vnd.microsoft.icon','.woff':'font/woff','.woff2':'font/woff2',
             '.ttf':'font/ttf','.otf':'font/otf','.mp3':'audio/mpeg','.wav':'audio/wav',
             '.ogg':'audio/ogg','.mp4':'video/mp4','.webm':'video/webm','.pdf':'application/pdf'}
-PERMISSIONS={'storage','files','secrets','network','network.local','characters.read','characters.write','chat.read','chat.write','ai.generate','prompt','clipboard','external.open','chat.tools'}
+PERMISSIONS={'storage','files','secrets','network','network.local','characters.read','characters.write','chat.read','chat.write','ai.generate','prompt','clipboard','external.open','chat.tools','runtime.local','device.observe','device.control','device.direct','agent.tasks'}
 MANIFEST_KEYS={'schemaVersion','apiVersion','id','name','version','minHostVersion','author','description','license','source','entry','permissions','networkDomains','contributes'}
 
 def require(value,message):
@@ -61,6 +61,7 @@ def manifest(raw):
     require(relative(raw['entry']) and raw['entry'].endswith('.html'),'Entry must be a relative HTML file')
     permissions=raw['permissions'];domains=raw['networkDomains']
     require(isinstance(permissions,list) and len(permissions)==len(set(permissions)) and set(permissions)<=PERMISSIONS,'Unsupported/duplicate permission')
+    require('runtime.local' not in permissions or tuple(map(int,raw['minHostVersion'].split('.')))>=(0,2,44),'Local runtime requires host 0.2.44')
     require(isinstance(domains,list) and len(domains)<=100 and len(domains)==len(set(domains)) and all(isinstance(d,str) and len(d)<=253 and (d=='*' or re.fullmatch(r'(\*\.)?[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?',d)) for d in domains),'Invalid network domains')
     require(not domains or 'network' in permissions,'Missing network permission')
     require('network.local' not in permissions or 'network' in permissions,'Local network also needs network permission')

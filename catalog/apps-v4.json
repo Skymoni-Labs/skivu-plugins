@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "protocolVersion": "4.0",
+  "protocolVersion": "3.0",
   "packages": [
     {
       "manifest": {

@@ -210,7 +210,7 @@
         "apiVersion": "1.0",
         "id": "org.skivu.dsh",
         "name": "手机 DSH",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "minHostVersion": "0.2.45",
         "author": "Skivu",
         "description": "在手机上运行 DeepSeek Harness：对话、编程、项目文件与经授权的手机操作。",
@@ -230,9 +230,9 @@
           "chatActions": []
         }
       },
-      "url": "https://skymoni.com/app-plugins/web-packages/d01bdaa64914f1b697989ecae211a89d290e42757cd612e6ec88e2012d8bc50c.json",
-      "sha256": "d01bdaa64914f1b697989ecae211a89d290e42757cd612e6ec88e2012d8bc50c",
-      "bytes": 40940
+      "url": "https://skymoni.com/app-plugins/web-packages/a457611eb2d38884f0bf379c89253407055cc8ad85b0c007729a5aa1d1870ab5.json",
+      "sha256": "a457611eb2d38884f0bf379c89253407055cc8ad85b0c007729a5aa1d1870ab5",
+      "bytes": 41040
     }
   ]
 }

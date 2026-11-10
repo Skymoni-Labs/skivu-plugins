@@ -240,10 +240,10 @@
         "apiVersion": "1.0",
         "id": "org.skivu.purge",
         "name": "小云 · 提示词注入",
-        "version": "1.1.1",
+        "version": "1.2.0",
         "minHostVersion": "0.2.96",
         "author": "Skivu",
-        "description": "仅向小云注入原包提示词，并读回核验保存结果。页面不展示提示词正文，可随时撤销。",
+        "description": "向当前选择的角色注入原包提示词，逐角色读回核验并独立撤销。页面不展示提示词正文。",
         "license": "MIT",
         "source": "https://github.com/skyjjgw/skivu-cloud-purge",
         "entry": "index.html",
@@ -257,9 +257,9 @@
           "chatActions": []
         }
       },
-      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-cloud-purge/a97e7ac830d85fe8580e82c806576ae3381f2d48/packages/skivu-purge-1.1.1.skivu.json",
-      "sha256": "495ebc069ead21ca4ed893cb683435a355026dc4874c8bac7f9eb9767aa00db2",
-      "bytes": 54176
+      "url": "https://raw.githubusercontent.com/skyjjgw/skivu-cloud-purge/d663cb1fbdff8876fb15ba583071ce590f5b5c63/packages/skivu-purge-1.2.0.skivu.json",
+      "sha256": "3bf0b724f4d010088084d2a92fc7bc6d628f90d6f44fddef1c5f9b58c9f99d03",
+      "bytes": 56419
     }
   ]
 }

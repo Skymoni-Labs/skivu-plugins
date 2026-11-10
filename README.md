@@ -2,6 +2,8 @@
 
 Skivu 社区插件收录与 SDK 仓库。独立插件在各自仓库开发和发布，本仓库只登记其版本与安装地址。欢迎为 [Skivu 手机 App](https://github.com/skyjjgw/skivu) 创作扩展、分享源码和提交收录申请。
 
+[小云 · 规则与演练 1.0.1](docs/cloud-purge.md) 已加入 `catalog/apps-v5.json`：提示词、多规则、技能、演练资料库、报告与备份。需要 Skivu 0.2.96，复用小云现有内置运行环境。原作者与迁移范围见插件说明。
+
 **Skivu 0.2.19 起支持从 App 插件市场安装 QQ、微信界面包。** 在市场安装后开启使用，也可以关闭或卸载；角色和聊天记录继续由原 App 保存。0.2.18 及更早版本需要先更新 App。
 
 **Skivu 0.2.38 / SDK 1.0 开放独立 Web 插件。** 自带 HTML/CSS/JavaScript、资源和业务逻辑，可提供独立页面、聊天动作或整个聊天界面。宿主 API 按用户授权提供隔离存档/文件/第三方密钥、网络、角色/聊天交互和模型生成代理。无需第三方 ID/renderer 白名单，可本地导入或添加自己的目录。服务器私有能力、配置和凭据不开放。见[开放 SDK](docs/open-plugin-sdk.md)、[可复制模板](templates/web-plugin/)和[打包工具](tools/build_web_plugin.py)。实际插件包由服务器目录分发，不内置 APK。

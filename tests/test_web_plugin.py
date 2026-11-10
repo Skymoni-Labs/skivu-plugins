@@ -10,6 +10,18 @@ spec=importlib.util.spec_from_file_location('web_plugin',ROOT/'tools/build_web_p
 web=importlib.util.module_from_spec(spec);spec.loader.exec_module(web)
 
 class WebPluginTests(unittest.TestCase):
+    def test_cloud_library_and_assistant_contributions_require_correct_host_permission_and_resource(self):
+        p=self.role_package();m=p['manifest'];m['minHostVersion']='0.2.96';m['permissions']+=['cloud.lab','assistant.tools'];m['contributes']['assistantTools']=m['contributes'].pop('roleCompanion');m['permissions'].remove('chat.tools')
+        web.validate_package(json.dumps(p).encode())
+        for change in ('library_version','assistant_version','permission','resource','unknown_permission'):
+            with self.subTest(change=change):
+                q=json.loads(json.dumps(p))
+                if change=='library_version':q['manifest']['minHostVersion']='0.2.95'
+                if change=='assistant_version':q['manifest']['permissions'].remove('cloud.lab');q['manifest']['minHostVersion']='0.2.80'
+                if change=='permission':q['manifest']['permissions'].remove('assistant.tools')
+                if change=='resource':del q['files']['runtime.html']
+                if change=='unknown_permission':q['manifest']['permissions'].append('server.config')
+                with self.assertRaises(ValueError):web.validate_package(json.dumps(q).encode())
     def role_package(self):
         p=json.loads(web.build(ROOT/'templates/web-plugin'));m=p['manifest'];m['minHostVersion']='0.2.41';m['permissions'].append('chat.tools');m['contributes']['roleCompanion']={'title':'Role item','entry':'runtime.html','tools':[{'id':'read_note','description':'Read own role note','effect':'read','parameters':{'type':'object','properties':{},'required':[],'additionalProperties':False}}]};p['files']['runtime.html']=p['files']['index.html'];return p
     def test_role_companion_uses_generic_package_entry(self):

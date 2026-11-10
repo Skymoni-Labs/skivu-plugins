@@ -36,6 +36,8 @@ Skivu 的独立 Web 插件使用 HTML/CSS/JavaScript、ES modules、Canvas、Web
 
 ## API 约定
 
+Skivu 0.2.81 起，`contributes.assistantTools` 可按与 `roleCompanion` 相同的 `{title,entry,tools}` 格式向小云贡献工具，需声明 `assistant.tools`；入口须为包内 HTML，工具仍按声明的读写效果和已授权能力执行。Skivu 0.2.96 起，`cloud.lab` 权限提供 `lab.call({request})`，管理当前插件自己的演练资料库；`prompt.get({})` 读取本插件当前角色的提示词贡献。它们不提供服务器配置、模型密钥或独立 DSH 运行器。参见[小云规则与演练示例](cloud-purge.md)。
+
 所有调用返回 Promise，失败为带 `code` 的 Error。参数与返回值均为 JSON。没有任何 API 返回宿主配置、服务器 URL、请求签名、后台路由、账号令牌或模型密钥。`host.info` 返回 SDK 版本、已实现方法和权限名，用于能力探测；不能据此绕过声明或用户授权。
 
 | 方法 | 权限 | 参数 / 返回 |

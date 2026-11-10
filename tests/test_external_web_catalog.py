@@ -26,6 +26,15 @@ class ExternalCatalogTests(unittest.TestCase):
     def test_external_repository_needs_no_local_source_or_bundle(self):
         self.check(self.entry)
 
+    def test_official_digest_mirror_checks_path_and_downloaded_bytes(self):
+        entry=copy.deepcopy(self.entry);entry['url']='https://skymoni.com/app-plugins/web-packages/'+entry['sha256']+'.json'
+        self.check(entry)
+        tampered=copy.deepcopy(entry);tampered['url']=entry['url'].replace(entry['sha256'],'0'*64)
+        with self.assertRaises(ValueError):validate_entry(tampered,{},lambda _:self.fail('Mismatched mirror digest was fetched'))
+        with self.assertRaises(ValueError):validate_entry(entry,{},lambda _:self.raw+b' ')
+        tampered=copy.deepcopy(entry);tampered['manifest']['name']='Changed'
+        with self.assertRaises(ValueError):validate_entry(tampered,{},lambda _:self.raw)
+
     def test_mutable_commits_hosts_and_paths_are_rejected_before_fetch(self):
         for url in [self.entry['url'].replace('a'*40,'main'),self.entry['url'].replace('https:','http:'),self.entry['url'].replace('raw.githubusercontent.com','example.com'),self.entry['url'].replace('/packages/','/../')]:
             entry=copy.deepcopy(self.entry);entry['url']=url

@@ -19,7 +19,7 @@ MIME_TYPES={'.html':'text/html','.htm':'text/html','.css':'text/css',
             '.ico':'image/vnd.microsoft.icon','.woff':'font/woff','.woff2':'font/woff2',
             '.ttf':'font/ttf','.otf':'font/otf','.mp3':'audio/mpeg','.wav':'audio/wav',
             '.ogg':'audio/ogg','.mp4':'video/mp4','.webm':'video/webm','.pdf':'application/pdf'}
-PERMISSIONS={'storage','files','secrets','network','network.local','characters.read','characters.write','chat.read','chat.write','ai.generate','prompt','clipboard','external.open','chat.tools','runtime.local','device.observe','device.control','device.direct','agent.tasks'}
+PERMISSIONS={'storage','files','secrets','network','network.local','characters.read','characters.write','chat.read','chat.write','ai.generate','prompt','clipboard','external.open','chat.tools','runtime.local','device.observe','device.control','device.direct','agent.tasks','cloud.lab','assistant.tools'}
 MANIFEST_KEYS={'schemaVersion','apiVersion','id','name','version','minHostVersion','author','description','license','source','entry','permissions','networkDomains','contributes'}
 
 def require(value,message):
@@ -42,9 +42,9 @@ def tool_schema(value,depth=0):
             require(re.fullmatch(r'[a-zA-Z][a-zA-Z0-9_]{0,79}',key),'Invalid parameter name');tool_schema(nested,depth+1)
     if value['type']=='array':tool_schema(value.get('items'),depth+1)
 
-def companion(raw,permissions,minimum):
+def companion(raw,permissions,minimum,permission='chat.tools',host=(0,2,41)):
     require(isinstance(raw,dict) and set(raw)=={'title','entry','tools'} and isinstance(raw['title'],str) and 0<len(raw['title'])<=80 and relative(raw['entry']) and raw['entry'].endswith('.html'),'Invalid companion')
-    require('chat.tools' in permissions and tuple(map(int,minimum.split('.')))>=(0,2,41),'Companion requires chat.tools and host 0.2.41')
+    require(permission in permissions and tuple(map(int,minimum.split('.')))>=host,'Tool contribution requires its explicit permission and compatible host')
     require(isinstance(raw['tools'],list) and 0<len(raw['tools'])<=20,'Invalid companion tools');ids=set()
     for tool in raw['tools']:
         require(isinstance(tool,dict) and set(tool)=={'id','description','effect','parameters'} and isinstance(tool['id'],str) and re.fullmatch(r'[a-z][a-z0-9_]{0,59}',tool['id']) and tool['id'] not in ids and isinstance(tool['description'],str) and 0<len(tool['description'])<=1200 and tool['effect'] in ('read','write','external'),'Invalid companion tool')
@@ -62,11 +62,13 @@ def manifest(raw):
     permissions=raw['permissions'];domains=raw['networkDomains']
     require(isinstance(permissions,list) and len(permissions)==len(set(permissions)) and set(permissions)<=PERMISSIONS,'Unsupported/duplicate permission')
     require('runtime.local' not in permissions or tuple(map(int,raw['minHostVersion'].split('.')))>=(0,2,44),'Local runtime requires host 0.2.44')
+    require('cloud.lab' not in permissions or tuple(map(int,raw['minHostVersion'].split('.')))>=(0,2,96),'Cloud library requires host 0.2.96')
     require(isinstance(domains,list) and len(domains)<=100 and len(domains)==len(set(domains)) and all(isinstance(d,str) and len(d)<=253 and (d=='*' or re.fullmatch(r'(\*\.)?[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?',d)) for d in domains),'Invalid network domains')
     require(not domains or 'network' in permissions,'Missing network permission')
     require('network.local' not in permissions or 'network' in permissions,'Local network also needs network permission')
-    c=raw['contributes'];require(isinstance(c,dict) and set(c)<={'launcher','chatActions','chatSurface','roleCompanion'} and isinstance(c.get('launcher'),bool) and isinstance(c.get('chatActions'),list) and len(c['chatActions'])<=20 and ('chatSurface' not in c or isinstance(c['chatSurface'],bool)),'Invalid contribution')
+    c=raw['contributes'];require(isinstance(c,dict) and set(c)<={'launcher','chatActions','chatSurface','roleCompanion','assistantTools'} and isinstance(c.get('launcher'),bool) and isinstance(c.get('chatActions'),list) and len(c['chatActions'])<=20 and ('chatSurface' not in c or isinstance(c['chatSurface'],bool)),'Invalid contribution')
     if 'roleCompanion' in c:companion(c['roleCompanion'],permissions,raw['minHostVersion'])
+    if 'assistantTools' in c:companion(c['assistantTools'],permissions,raw['minHostVersion'],'assistant.tools',(0,2,81))
     ids=set()
     for a in c['chatActions']:
         require(isinstance(a,dict) and set(a)=={'id','title'} and isinstance(a['id'],str) and re.fullmatch(r'[a-z0-9][a-z0-9.-]{0,79}',a['id']) and a['id'] not in ids and isinstance(a['title'],str) and 0<len(a['title'])<=80,'Invalid action')
@@ -84,6 +86,7 @@ def validate_package(raw):
         data=base64.b64decode(f['base64'],validate=True);total+=len(data);require(len(data)<=8*1024*1024 and total<=24*1024*1024,'Resources exceed limits')
     require(p['files'][m['entry']]['mime']=='text/html','Entry MIME must be text/html')
     if 'roleCompanion' in m['contributes']:require(p['files'].get(m['contributes']['roleCompanion']['entry'],{}).get('mime')=='text/html','Missing companion entry')
+    if 'assistantTools' in m['contributes']:require(p['files'].get(m['contributes']['assistantTools']['entry'],{}).get('mime')=='text/html','Missing assistant tools entry')
     return p
 
 def build(directory):

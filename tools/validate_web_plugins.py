@@ -24,6 +24,12 @@ def validate_entry(e,packages,loader=download):
     require(isinstance(e['sha256'],str) and re.fullmatch(r'[a-f0-9]{64}',e['sha256']),'Invalid catalog digest')
     require(type(e['bytes']) is int and 0<e['bytes']<=MAX_PACKAGE,'Invalid catalog size')
     require(isinstance(e['url'],str),'Invalid package URL')
+    mirror=re.fullmatch(r'https://skymoni\.com/app-plugins/web-packages/([a-f0-9]{64})\.json',e['url'])
+    if mirror:
+        require(mirror[1]==e['sha256'],'Mirror path must match catalog digest')
+        raw=loader(e['url']);p=validate_package(raw)
+        require(p['manifest']==e['manifest'] and len(raw)==e['bytes'] and hashlib.sha256(raw).hexdigest()==e['sha256'],'Catalog/package mismatch')
+        return
     m=re.fullmatch(r'https://raw\.githubusercontent\.com/([A-Za-z0-9_-]+)/([A-Za-z0-9_.-]+)/([a-f0-9]{40})/(.+)',e['url'])
     require(m and relative(m[4]) and m[4].endswith('.json'),'Catalog must pin a full commit and safe JSON path')
     ident=e['manifest']['id']
@@ -50,7 +56,7 @@ def validate():
         for item in provenance['files']:
             file=(preferred/item['path']).resolve();require(file.is_relative_to(preferred) and hashlib.sha256(file.read_bytes()).hexdigest()==item['sha256'],'Editable source digest mismatch')
     count=0
-    for name in ['apps.json','apps-v2.json','apps-v3.json']:
+    for name in ['apps.json','apps-v2.json','apps-v3.json','apps-v4.json','apps-v5.json']:
         path=ROOT/'catalog'/name;entries=[]
         if path.exists():
             c=json.loads(path.read_bytes());require(set(c)=={'schemaVersion','protocolVersion','packages'} and c['schemaVersion']==1 and c['protocolVersion']=='3.0' and isinstance(c['packages'],list) and len(c['packages'])<=5000,'Invalid Web catalog');entries=c['packages']
